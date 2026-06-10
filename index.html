@@ -248,7 +248,12 @@
     .contact h2 .ko { display:block; font-size: 28px; color: var(--veeam-green-bright); margin-bottom: 10px; }
     .contact p { font: 400 19px/28px var(--font-sans); color: rgba(255,255,255,.82); max-width: 56ch; margin: 0 auto 30px; }
     .contact .hosts { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 46px; color: rgba(255,255,255,.7); font: 400 15px/22px var(--font-sans); }
-    .contact .hosts strong { display: block; color: #fff; font: 700 17px/24px var(--font-display); }
+    .contact .hosts strong { display: block; color: #fff; font: 700 19px/26px var(--font-display); margin-bottom: 2px; }
+    .host-card { display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 24px; padding: 18px 28px 18px 18px; backdrop-filter: blur(8px); }
+    .host-avatar { flex: none; animation: sj-float 3.8s ease-in-out infinite; }
+    @keyframes sj-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    .host-info { display: flex; flex-direction: column; text-align: left; }
+    .host-info span { font: 400 14px/20px var(--font-sans); color: rgba(255,255,255,.65); }
     .foot {
       border-top: 1px solid rgba(255,255,255,.12); margin-top: 56px; padding-top: 26px;
       display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
@@ -295,6 +300,8 @@
       .contact p { font-size: 16px; line-height: 25px; }
       .contact .hosts { gap: 20px; flex-direction: column; align-items: center; }
       .contact .hosts > div { text-align: center; }
+      .host-card { flex-direction: column; text-align: center; padding: 20px; }
+      .host-info { align-items: center; }
       .foot { flex-direction: column; align-items: center; gap: 10px; text-align: center; }
     }
     @media (max-width: 380px) {
@@ -579,7 +586,111 @@
       <a class="btn btn-primary" href="mailto:s.park@veeam.com?subject=M365%20Resilience%20follow-up">Book a follow-up</a>
 
       <div class="hosts">
-        <div><strong>Sungjin Park</strong>Lead Alliances Manager, Veeam Korea<br><a href="mailto:s.park@veeam.com" style="color:rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.3);">s.park@veeam.com</a></div>
+        <div class="host-card">
+          <!-- Chibi Sungjin mascot -->
+          <div class="host-avatar">
+            <svg viewBox="0 0 160 190" width="140" height="166" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="sjSkin" cx="44%" cy="36%" r="70%">
+                  <stop offset="0%" stop-color="#FDDEC8"/>
+                  <stop offset="60%" stop-color="#F5C8A8"/>
+                  <stop offset="100%" stop-color="#EDBA95"/>
+                </radialGradient>
+                <radialGradient id="sjCheek" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#FFAAB0"/>
+                  <stop offset="100%" stop-color="#FFAAB0" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="sjGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#00D15F" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#00D15F" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+
+              <!-- Shadow -->
+              <ellipse cx="80" cy="183" rx="38" ry="5.5" fill="rgba(0,0,0,0.12)"/>
+
+              <!-- Glow halo -->
+              <ellipse cx="80" cy="95" rx="58" ry="58" fill="url(#sjGlow)"/>
+
+              <!-- Body / jacket (dark navy) -->
+              <path d="M30 175 Q28 148 34 138 L52 128 Q64 140 80 140 Q96 140 108 128 L126 138 Q132 148 130 175 Z" fill="#1A2550"/>
+              <!-- Jacket lapels -->
+              <path d="M80 140 L68 128 L72 155 Z" fill="#263070"/>
+              <path d="M80 140 L92 128 L88 155 Z" fill="#263070"/>
+              <!-- Shirt / tie peek -->
+              <path d="M72 155 L80 148 L88 155 L80 175 Z" fill="#E8EEF8"/>
+              <path d="M78 152 L80 148 L82 152 L80 168 Z" fill="#00D15F"/>
+
+              <!-- Collar / neck -->
+              <rect x="72" y="126" width="16" height="14" rx="4" fill="url(#sjSkin)"/>
+
+              <!-- Head -->
+              <ellipse cx="80" cy="90" rx="46" ry="44" fill="url(#sjSkin)" stroke="#E8B88A" stroke-width="1.5"/>
+
+              <!-- Hair — short dark, slight swoop -->
+              <path d="M36 84 C34 52 46 38 80 36 C114 38 126 52 124 84 C120 60 108 48 80 47 C52 48 40 60 36 84 Z" fill="#1A1410"/>
+              <!-- Hair fringe detail -->
+              <path d="M52 54 C56 46 64 43 72 44 C66 49 60 53 57 60 Z" fill="#261E19"/>
+              <path d="M108 54 C104 46 96 43 88 44 C94 49 100 53 103 60 Z" fill="#261E19"/>
+
+              <!-- Ears -->
+              <ellipse cx="35" cy="92" rx="8" ry="10" fill="url(#sjSkin)" stroke="#E8B88A" stroke-width="1.2"/>
+              <ellipse cx="125" cy="92" rx="8" ry="10" fill="url(#sjSkin)" stroke="#E8B88A" stroke-width="1.2"/>
+              <ellipse cx="35" cy="92" rx="4.5" ry="6" fill="#F0C5A4"/>
+              <ellipse cx="125" cy="92" rx="4.5" ry="6" fill="#F0C5A4"/>
+
+              <!-- Cheeks -->
+              <ellipse cx="52" cy="103" rx="11" ry="7.5" fill="url(#sjCheek)" opacity="0.7"/>
+              <ellipse cx="108" cy="103" rx="11" ry="7.5" fill="url(#sjCheek)" opacity="0.7"/>
+
+              <!-- Eyes (whites) -->
+              <ellipse cx="63" cy="91" rx="11" ry="12" fill="#fff"/>
+              <ellipse cx="97" cy="91" rx="11" ry="12" fill="#fff"/>
+              <!-- Irises -->
+              <ellipse cx="65" cy="93" rx="7.5" ry="8.5" fill="#2C1A0E"/>
+              <ellipse cx="99" cy="93" rx="7.5" ry="8.5" fill="#2C1A0E"/>
+              <!-- Pupils shine -->
+              <circle cx="62" cy="89" r="2.8" fill="#fff"/>
+              <circle cx="96" cy="89" r="2.8" fill="#fff"/>
+              <circle cx="68" cy="96" r="1.4" fill="#fff" opacity="0.75"/>
+              <circle cx="102" cy="96" r="1.4" fill="#fff" opacity="0.75"/>
+
+              <!-- Glasses frame -->
+              <!-- Left lens -->
+              <rect x="52" y="81" width="24" height="20" rx="6" fill="none" stroke="#2A2A2A" stroke-width="2.8"/>
+              <!-- Right lens -->
+              <rect x="84" y="81" width="24" height="20" rx="6" fill="none" stroke="#2A2A2A" stroke-width="2.8"/>
+              <!-- Bridge -->
+              <line x1="76" y1="90" x2="84" y2="90" stroke="#2A2A2A" stroke-width="2.4" stroke-linecap="round"/>
+              <!-- Left arm -->
+              <line x1="52" y1="90" x2="36" y2="88" stroke="#2A2A2A" stroke-width="2.2" stroke-linecap="round"/>
+              <!-- Right arm -->
+              <line x1="108" y1="90" x2="124" y2="88" stroke="#2A2A2A" stroke-width="2.2" stroke-linecap="round"/>
+              <!-- Lens tint subtle -->
+              <rect x="52" y="81" width="24" height="20" rx="6" fill="#D6E8FF" opacity="0.18"/>
+              <rect x="84" y="81" width="24" height="20" rx="6" fill="#D6E8FF" opacity="0.18"/>
+
+              <!-- Nose -->
+              <path d="M78 101 Q80 105 82 101" stroke="#C89070" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+
+              <!-- Smile -->
+              <path d="M70 112 Q80 121 90 112" stroke="#C06060" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+
+              <!-- Veeam green badge on jacket -->
+              <circle cx="46" cy="152" r="8" fill="#00D15F"/>
+              <path d="M42 152 l4 5 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+              <!-- Floating spark -->
+              <g fill="#FFD56B" opacity="0.9"><path d="M132 68 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 Z"/></g>
+              <circle cx="26" cy="74" r="3" fill="#78F6A6" opacity="0.8"/>
+            </svg>
+          </div>
+          <div class="host-info">
+            <strong>Sungjin Park</strong>
+            <span>Lead Alliances Manager, Veeam Korea</span>
+            <a href="mailto:s.park@veeam.com" style="color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.3);margin-top:4px;display:inline-block;">s.park@veeam.com</a>
+          </div>
+        </div>
       </div>
 
       <div class="foot">
