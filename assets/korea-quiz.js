@@ -3,17 +3,17 @@
   // Buddy thresholds keyed off % of 12 questions answered "yes".
   const BUDDIES = [
     { key: 'kongi',  min: 0,  max: 24,  name: 'Kongi',  hangul: '콩이',
-      title: 'The Sprout',
-      msg: "You're at the very start of a great journey — and that's the perfect place to be. A few smart moves now will protect everything you build next." },
+      title: '새싹',
+      msg: "이제 막 훌륭한 여정을 시작했습니다 — 지금이 바로 완벽한 출발점입니다. 지금 몇 가지 현명한 조치를 취하면 앞으로 쌓아갈 모든 것을 지킬 수 있습니다." },
     { key: 'bangul', min: 25, max: 54, name: 'Bangul', hangul: '방울',
-      title: 'The Dewdrop',
-      msg: "Real momentum! The fundamentals are taking shape. A little focus on immutability and recovery will carry you to the next level." },
+      title: '물방울',
+      msg: "좋은 흐름입니다! 기본기가 갖춰지고 있습니다. immutability와 복구에 조금만 더 집중하면 다음 단계로 올라갈 수 있습니다." },
     { key: 'gureum', min: 55, max: 84, name: 'Gureum', hangul: '구름',
-      title: 'The Cloud',
-      msg: "Impressive — you're already resilience-ready. The last stretch is usually identity rollback and signed-off recovery targets." },
+      title: '구름',
+      msg: "인상적입니다 — 이미 복원력 준비가 되어 있습니다. 마지막 단계는 보통 identity rollback과 공식 복구 목표 확정입니다." },
     { key: 'horang', min: 85, max: 100, name: 'Horang', hangul: '호랑',
-      title: 'The Tiger',
-      msg: "Gold standard. You have audit-ready resilience — exactly what a confident, AI-ready organisation looks like. 멋져요!" },
+      title: '호랑이',
+      msg: "최고 수준입니다. 감사 대비 복원력을 갖추셨습니다 — 자신감 있는 AI 준비 기업의 모습 그 자체입니다. 멋져요!" },
   ];
 
   function pick(pct) {
