@@ -1,17 +1,18 @@
-/* Veeam Korea — mini resilience quiz: 12 positive questions, 4 cute buddies */
+/* Veeam Korea — mini resilience quiz: 8 questions, 4 cute buddies */
 (function () {
-  // Buddy thresholds keyed off % of 12 questions answered "yes".
+  // Thresholds based on 8 questions: 0-2 ticks=Kongi, 3-4=Bangul, 5-6=Gureum, 7-8=Horang
+  // Percentages: 2/8=25%, 4/8=50%, 6/8=75%, 8/8=100%
   const BUDDIES = [
-    { key: 'kongi',  min: 0,  max: 24,  name: 'Kongi',  hangul: '콩이',
+    { key: 'kongi',  min: 0,  max: 25,  name: 'Kongi',  hangul: '콩이',
       title: '새싹',
       msg: "이제 막 훌륭한 여정을 시작했습니다 — 지금이 바로 완벽한 출발점입니다. 지금 몇 가지 현명한 조치를 취하면 앞으로 쌓아갈 모든 것을 지킬 수 있습니다." },
-    { key: 'bangul', min: 25, max: 54, name: 'Bangul', hangul: '방울',
+    { key: 'bangul', min: 26, max: 50, name: 'Bangul', hangul: '방울',
       title: '물방울',
       msg: "좋은 흐름입니다! 기본기가 갖춰지고 있습니다. immutability와 복구에 조금만 더 집중하면 다음 단계로 올라갈 수 있습니다." },
-    { key: 'gureum', min: 55, max: 84, name: 'Gureum', hangul: '구름',
+    { key: 'gureum', min: 51, max: 75, name: 'Gureum', hangul: '구름',
       title: '구름',
       msg: "인상적입니다 — 이미 복원력 준비가 되어 있습니다. 마지막 단계는 보통 identity rollback과 공식 복구 목표 확정입니다." },
-    { key: 'horang', min: 85, max: 100, name: 'Horang', hangul: '호랑',
+    { key: 'horang', min: 76, max: 100, name: 'Horang', hangul: '호랑',
       title: '호랑이',
       msg: "최고 수준입니다. 감사 대비 복원력을 갖추셨습니다 — 자신감 있는 AI 준비 기업의 모습 그 자체입니다. 멋져요!" },
   ];
@@ -39,9 +40,9 @@
       ring.style.strokeDasharray = C;
       ring.style.strokeDashoffset = C * (1 - pct / 100);
       let color = '#FE8A25';
-      if (pct >= 25) color = '#FFC355';
-      if (pct >= 55) color = '#57E0FF';
-      if (pct >= 85) color = '#00D15F';
+      if (pct >= 26) color = '#FFC355';
+      if (pct >= 51) color = '#57E0FF';
+      if (pct >= 76) color = '#00D15F';
       ring.style.stroke = color;
     }
 
