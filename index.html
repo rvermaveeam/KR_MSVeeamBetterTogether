@@ -587,129 +587,144 @@
         <div class="host-card">
           <!-- Chibi Sungjin mascot -->
           <div class="host-avatar">
-            <svg viewBox="0 0 160 196" width="140" height="172" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 160 200" width="148" height="185" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <radialGradient id="sjSkin" cx="42%" cy="32%" r="72%">
-                  <stop offset="0%" stop-color="#FDE8D4"/>
-                  <stop offset="55%" stop-color="#F5CEAE"/>
-                  <stop offset="100%" stop-color="#EAB98C"/>
+                <radialGradient id="sjSkin" cx="40%" cy="30%" r="70%">
+                  <stop offset="0%"   stop-color="#FEEADB"/>
+                  <stop offset="50%"  stop-color="#F8D4B4"/>
+                  <stop offset="100%" stop-color="#EFBC92"/>
                 </radialGradient>
-                <radialGradient id="sjCheek" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#FFB3BB" stop-opacity="0.75"/>
-                  <stop offset="100%" stop-color="#FFB3BB" stop-opacity="0"/>
+                <radialGradient id="sjCheekL" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%"   stop-color="#FFB3C1" stop-opacity="0.72"/>
+                  <stop offset="100%" stop-color="#FFB3C1" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="sjCheekR" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%"   stop-color="#FFB3C1" stop-opacity="0.72"/>
+                  <stop offset="100%" stop-color="#FFB3C1" stop-opacity="0"/>
                 </radialGradient>
                 <radialGradient id="sjGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#00D15F" stop-opacity="0.28"/>
+                  <stop offset="0%"   stop-color="#00D15F" stop-opacity="0.22"/>
                   <stop offset="100%" stop-color="#00D15F" stop-opacity="0"/>
                 </radialGradient>
-                <clipPath id="sjHairClip">
-                  <ellipse cx="80" cy="84" rx="44" ry="42"/>
-                </clipPath>
+                <filter id="sjSoft" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="1.2"/>
+                </filter>
               </defs>
 
               <!-- Ground shadow -->
-              <ellipse cx="80" cy="189" rx="36" ry="5" fill="rgba(0,0,0,0.11)"/>
+              <ellipse cx="80" cy="194" rx="34" ry="4.5" fill="rgba(0,0,0,0.10)"/>
 
-              <!-- Soft glow halo -->
-              <ellipse cx="80" cy="90" rx="55" ry="54" fill="url(#sjGlow)"/>
+              <!-- Ambient glow -->
+              <ellipse cx="80" cy="92" rx="60" ry="58" fill="url(#sjGlow)"/>
 
-              <!-- ── BODY ── -->
-              <!-- White crew-neck undershirt (visible at collar) -->
-              <path d="M62 133 Q80 145 98 133 L104 142 Q80 155 56 142 Z" fill="#EEEEF2"/>
-              <!-- Navy jacket body -->
-              <path d="M28 188 Q26 158 32 144 L56 130 Q68 142 80 142 Q92 142 104 130 L128 144 Q134 158 132 188 Z" fill="#18234A"/>
-              <!-- Jacket highlight / lapel crease -->
-              <path d="M56 130 Q64 136 68 148 L80 142 L92 148 Q96 136 104 130" fill="none" stroke="#232F5E" stroke-width="1.5"/>
-              <!-- White shirt collar V -->
-              <path d="M68 142 L80 152 L92 142" fill="none" stroke="#D8D8E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- ══ BODY ══ -->
+              <!-- Jacket base — rich navy -->
+              <path d="M22 196 Q20 162 28 146 L54 130 Q66 144 80 144 Q94 144 106 130 L132 146 Q140 162 138 196 Z" fill="#1C2B5E"/>
+              <!-- Jacket sheen / left panel -->
+              <path d="M54 130 Q62 138 66 152 L80 144 L94 152 Q98 138 106 130 Z" fill="#243268"/>
+              <!-- White crew-neck collar -->
+              <path d="M66 140 Q80 152 94 140 Q87 134 80 136 Q73 134 66 140 Z" fill="#F0F0F6"/>
+              <!-- Lapel shadow lines -->
+              <path d="M66 140 L74 158" stroke="#161E4A" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+              <path d="M94 140 L86 158" stroke="#161E4A" stroke-width="1.2" fill="none" stroke-linecap="round"/>
               <!-- Jacket buttons -->
-              <circle cx="80" cy="162" r="2.4" fill="#2B3870"/>
-              <circle cx="80" cy="172" r="2.4" fill="#2B3870"/>
+              <circle cx="80" cy="166" r="2.6" fill="#151E4A"/>
+              <circle cx="80" cy="177" r="2.6" fill="#151E4A"/>
+              <!-- Veeam green lapel pin -->
+              <circle cx="60" cy="153" r="7.5" fill="#00D15F"/>
+              <circle cx="60" cy="153" r="7.5" fill="none" stroke="#00B352" stroke-width="1"/>
+              <path d="M56.5 153 l3.5 4.5 7-7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 
-              <!-- ── NECK ── -->
-              <path d="M71 128 Q80 136 89 128 L89 140 Q80 146 71 140 Z" fill="url(#sjSkin)"/>
+              <!-- ══ NECK ══ -->
+              <path d="M70 130 C70 124 90 124 90 130 L90 142 C90 147 70 147 70 142 Z" fill="url(#sjSkin)"/>
 
-              <!-- ── HEAD — slim oval ── -->
-              <ellipse cx="80" cy="86" rx="42" ry="44" fill="url(#sjSkin)" stroke="#DDA878" stroke-width="1.4"/>
+              <!-- ══ HEAD — large chibi, softly oval ══ -->
+              <!-- Soft shadow under head -->
+              <ellipse cx="80" cy="94" rx="48" ry="47" fill="rgba(0,0,0,0.05)" filter="url(#sjSoft)"/>
+              <ellipse cx="80" cy="90" rx="47" ry="46" fill="url(#sjSkin)" stroke="#E4B48A" stroke-width="1.2"/>
 
-              <!-- ── HAIR ── short, neat, slight left part -->
-              <!-- Main hair mass -->
-              <path d="M38 80 C38 44 52 34 80 33 C108 34 122 44 122 80 C118 54 106 44 80 44 C54 44 42 54 38 80 Z" fill="#151210"/>
-              <!-- Side part detail — slight swoop left -->
-              <path d="M38 72 C40 58 50 48 64 46 C58 52 52 60 50 70 Z" fill="#1E1812"/>
-              <!-- Top slight texture -->
-              <path d="M80 33 C86 33 94 36 100 42 C92 38 84 36 80 36 Z" fill="#201A14"/>
-              <!-- Sideburn left -->
-              <path d="M38 80 C37 88 37 96 40 102 C38 96 38 88 40 82 Z" fill="#151210"/>
-              <!-- Sideburn right -->
-              <path d="M122 80 C123 88 123 96 120 102 C122 96 122 88 120 82 Z" fill="#151210"/>
+              <!-- ══ HAIR — neat, short, soft swoop ══ -->
+              <!-- Main cap -->
+              <path d="M33 82 C33 46 52 30 80 29 C108 30 127 46 127 82
+                        C123 55 110 43 80 43 C50 43 37 55 33 82 Z" fill="#18120E"/>
+              <!-- Left side sweep -->
+              <path d="M33 78 C34 62 44 50 58 46 C50 54 44 64 42 78 Z" fill="#221810"/>
+              <!-- Soft top highlight -->
+              <path d="M62 32 C68 29 80 28 92 32 C84 31 80 30 76 31 Z" fill="#2A1E18" opacity="0.6"/>
+              <!-- Sideburns -->
+              <path d="M33 82 C32 92 33 102 36 108 C34 100 33 90 35 84 Z" fill="#18120E"/>
+              <path d="M127 82 C128 92 127 102 124 108 C126 100 127 90 125 84 Z" fill="#18120E"/>
 
-              <!-- ── EARS ── -->
-              <ellipse cx="38" cy="88" rx="7.5" ry="9.5" fill="url(#sjSkin)" stroke="#DDA878" stroke-width="1.2"/>
-              <ellipse cx="122" cy="88" rx="7.5" ry="9.5" fill="url(#sjSkin)" stroke="#DDA878" stroke-width="1.2"/>
-              <ellipse cx="38" cy="88" rx="4" ry="5.5" fill="#EDBE9A"/>
-              <ellipse cx="122" cy="88" rx="4" ry="5.5" fill="#EDBE9A"/>
+              <!-- ══ EARS ══ -->
+              <ellipse cx="33" cy="91" rx="7" ry="9" fill="url(#sjSkin)" stroke="#E4B48A" stroke-width="1.1"/>
+              <ellipse cx="127" cy="91" rx="7" ry="9" fill="url(#sjSkin)" stroke="#E4B48A" stroke-width="1.1"/>
+              <ellipse cx="33"  cy="91" rx="3.8" ry="5.2" fill="#EEC09A"/>
+              <ellipse cx="127" cy="91" rx="3.8" ry="5.2" fill="#EEC09A"/>
 
-              <!-- ── CHEEKS ── -->
-              <ellipse cx="52" cy="100" rx="12" ry="8" fill="url(#sjCheek)"/>
-              <ellipse cx="108" cy="100" rx="12" ry="8" fill="url(#sjCheek)"/>
+              <!-- ══ BROWS — thin, clean, friendly arch ══ -->
+              <path d="M53 72 Q63 67 72 69.5" stroke="#241A10" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+              <path d="M88 69.5 Q97 67 107 72"  stroke="#241A10" stroke-width="2.4" fill="none" stroke-linecap="round"/>
 
-              <!-- ── EYEBROWS — thin, slightly arched ── -->
-              <path d="M55 72 Q64 68 72 70" stroke="#2A1F14" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-              <path d="M88 70 Q96 68 105 72" stroke="#2A1F14" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              <!-- ══ EYES — big chibi, warm & friendly ══ -->
+              <!-- Eye whites — large, slightly taller than wide -->
+              <ellipse cx="63" cy="85" rx="12"  ry="13"  fill="#fff"/>
+              <ellipse cx="97" cy="85" rx="12"  ry="13"  fill="#fff"/>
+              <!-- Soft upper-lid line (monolid, clean) -->
+              <path d="M51 80 Q63 75 75 80" fill="#F8D4B4" stroke="#F8D4B4" stroke-width="0.5"/>
+              <path d="M85 80 Q97 75 109 80" fill="#F8D4B4" stroke="#F8D4B4" stroke-width="0.5"/>
+              <!-- Iris — warm dark brown -->
+              <circle cx="63" cy="87" r="8.5" fill="#1E1008"/>
+              <circle cx="97" cy="87" r="8.5" fill="#1E1008"/>
+              <!-- Iris colour ring -->
+              <circle cx="63" cy="87" r="8.5" fill="none" stroke="#3A2012" stroke-width="1.5"/>
+              <circle cx="97" cy="87" r="8.5" fill="none" stroke="#3A2012" stroke-width="1.5"/>
+              <!-- Big sparkle highlight -->
+              <circle cx="58.5" cy="82"  r="3.4" fill="#fff"/>
+              <circle cx="92.5" cy="82"  r="3.4" fill="#fff"/>
+              <!-- Small lower highlight -->
+              <circle cx="67"   cy="91"  r="1.6" fill="#fff" opacity="0.65"/>
+              <circle cx="101"  cy="91"  r="1.6" fill="#fff" opacity="0.65"/>
+              <!-- Lash line — clean arc -->
+              <path d="M51 80.5 Q63 76 75 80.5" fill="none" stroke="#120C06" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M85 80.5 Q97 76 109 80.5" fill="none" stroke="#120C06" stroke-width="2.2" stroke-linecap="round"/>
+              <!-- Subtle lower lash -->
+              <path d="M52 90 Q63 94 74 90" fill="none" stroke="#120C06" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+              <path d="M86 90 Q97 94 108 90" fill="none" stroke="#120C06" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
 
-              <!-- ── EYES — monolid style, almond shaped ── -->
-              <!-- Whites -->
-              <ellipse cx="64" cy="84" rx="10" ry="8.5" fill="#fff"/>
-              <ellipse cx="96" cy="84" rx="10" ry="8.5" fill="#fff"/>
-              <!-- Upper lid shadow (monolid) -->
-              <path d="M54 80 Q64 76 74 80" fill="#EAB98C" opacity="0.5"/>
-              <path d="M86 80 Q96 76 106 80" fill="#EAB98C" opacity="0.5"/>
-              <!-- Irises -->
-              <ellipse cx="64" cy="85" rx="7" ry="7.5" fill="#251608"/>
-              <ellipse cx="96" cy="85" rx="7" ry="7.5" fill="#251608"/>
-              <!-- Shine highlights -->
-              <circle cx="61" cy="81.5" r="2.6" fill="#fff"/>
-              <circle cx="93" cy="81.5" r="2.6" fill="#fff"/>
-              <circle cx="67" cy="88" r="1.3" fill="#fff" opacity="0.7"/>
-              <circle cx="99" cy="88" r="1.3" fill="#fff" opacity="0.7"/>
-              <!-- Upper lash line -->
-              <path d="M54 81 Q64 77.5 74 81" fill="none" stroke="#1A1008" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M86 81 Q96 77.5 106 81" fill="none" stroke="#1A1008" stroke-width="1.8" stroke-linecap="round"/>
+              <!-- ══ GLASSES — round oval, slim stylish frame ══ -->
+              <ellipse cx="63" cy="85" rx="14.5" ry="13.5" fill="none" stroke="#1A1A1A" stroke-width="2.4"/>
+              <ellipse cx="97" cy="85" rx="14.5" ry="13.5" fill="none" stroke="#1A1A1A" stroke-width="2.4"/>
+              <!-- Bridge — thin elegant -->
+              <path d="M77.5 84 Q80 81.5 82.5 84" fill="none" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+              <!-- Arms -->
+              <path d="M48.5 83 Q41 84 33 86" fill="none" stroke="#1A1A1A" stroke-width="1.9" stroke-linecap="round"/>
+              <path d="M111.5 83 Q119 84 127 86" fill="none" stroke="#1A1A1A" stroke-width="1.9" stroke-linecap="round"/>
+              <!-- Lens glare -->
+              <ellipse cx="63" cy="85" rx="14.5" ry="13.5" fill="#E8F0FF" opacity="0.10"/>
+              <ellipse cx="97" cy="85" rx="14.5" ry="13.5" fill="#E8F0FF" opacity="0.10"/>
+              <!-- Tiny top-left lens shine -->
+              <path d="M53 76 Q56 74 59 76" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
+              <path d="M87 76 Q90 74 93 76" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
 
-              <!-- ── GLASSES — round oval frames (key feature) ── -->
-              <!-- Left oval lens -->
-              <ellipse cx="64" cy="84" rx="13" ry="12" fill="none" stroke="#222222" stroke-width="2.6"/>
-              <!-- Right oval lens -->
-              <ellipse cx="96" cy="84" rx="13" ry="12" fill="none" stroke="#222222" stroke-width="2.6"/>
-              <!-- Bridge -->
-              <path d="M77 84 Q80 81 83 84" fill="none" stroke="#222222" stroke-width="2.2" stroke-linecap="round"/>
-              <!-- Left arm to ear -->
-              <path d="M51 82 Q44 83 38 85" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
-              <!-- Right arm to ear -->
-              <path d="M109 82 Q116 83 122 85" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
-              <!-- Lens tint -->
-              <ellipse cx="64" cy="84" rx="13" ry="12" fill="#C8DCFF" opacity="0.12"/>
-              <ellipse cx="96" cy="84" rx="13" ry="12" fill="#C8DCFF" opacity="0.12"/>
+              <!-- ══ CHEEKS ══ -->
+              <ellipse cx="48"  cy="100" rx="13" ry="9" fill="url(#sjCheekL)"/>
+              <ellipse cx="112" cy="100" rx="13" ry="9" fill="url(#sjCheekR)"/>
 
-              <!-- ── NOSE — small, subtle ── -->
-              <path d="M77 97 Q80 101 83 97" stroke="#C8966A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-              <circle cx="78" cy="99" r="1.1" fill="#C8966A" opacity="0.5"/>
-              <circle cx="82" cy="99" r="1.1" fill="#C8966A" opacity="0.5"/>
+              <!-- ══ NOSE — minimal, cute ══ -->
+              <path d="M77.5 99 Q80 104 82.5 99" stroke="#D4956A" stroke-width="1.6" fill="none" stroke-linecap="round"/>
 
-              <!-- ── MOUTH — gentle closed smile ── -->
-              <path d="M72 109 Q80 116 88 109" stroke="#C05858" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <path d="M72 109 Q70 107 72 105" stroke="#C05858" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-              <path d="M88 109 Q90 107 88 105" stroke="#C05858" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+              <!-- ══ MOUTH — warm, handsome smile with dimples ══ -->
+              <!-- Smile curve -->
+              <path d="M70 112 Q80 121 90 112" stroke="#C45C5C" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              <!-- Dimple dots -->
+              <circle cx="69.5" cy="111" r="1.5" fill="#D07070" opacity="0.55"/>
+              <circle cx="90.5" cy="111" r="1.5" fill="#D07070" opacity="0.55"/>
 
-              <!-- ── VEEAM PIN on jacket ── -->
-              <circle cx="45" cy="158" r="8.5" fill="#00D15F"/>
-              <path d="M41 158 l4 5 8-8" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-
-              <!-- ── SPARKLES ── -->
-              <g fill="#FFD56B" opacity="0.95"><path d="M134 64 l2.2 5.4 5.4 2.2 -5.4 2.2 -2.2 5.4 -2.2 -5.4 -5.4 -2.2 5.4 -2.2 Z"/></g>
-              <circle cx="24" cy="70" r="3" fill="#78F6A6" opacity="0.85"/>
-              <circle cx="136" cy="108" r="2" fill="#57E0FF" opacity="0.7"/>
+              <!-- ══ SPARKLES ══ -->
+              <g fill="#FFD56B"><path d="M136 58 l2.4 5.8 5.8 2.4 -5.8 2.4 -2.4 5.8 -2.4 -5.8 -5.8 -2.4 5.8 -2.4 Z" opacity="0.92"/></g>
+              <circle cx="22" cy="66" r="3.2" fill="#78F6A6" opacity="0.88"/>
+              <circle cx="138" cy="112" r="1.8" fill="#57E0FF" opacity="0.75"/>
+              <circle cx="26" cy="110" r="1.4" fill="#FFD56B" opacity="0.6"/>
             </svg>
           </div>
           <div class="host-info">
