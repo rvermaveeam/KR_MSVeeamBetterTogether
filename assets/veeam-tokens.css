@@ -1,0 +1,259 @@
+/* ============================================================
+   Veeam Design System — Colors + Type tokens
+   Font family: ES Build (custom). Primary palette: green #00D15F,
+   blue #3700FF, near-black #232323, white. Gradients blue→green
+   are a signature motif.
+   ============================================================ */
+
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: "ES Build";
+  src: url("fonts/ESBuild-Regular.woff2") format("woff2"),
+       url("fonts/ESBuild-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ES Build";
+  src: url("fonts/ESBuild-Italic.woff2") format("woff2"),
+       url("fonts/ESBuild-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ES Build";
+  src: url("fonts/ESBuild-Medium.woff2") format("woff2"),
+       url("fonts/ESBuild-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ES Build";
+  src: url("fonts/ESBuild-MediumItalic.woff2") format("woff2"),
+       url("fonts/ESBuild-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ES Build";
+  src: url("fonts/ESBuild-SemiBold.woff2") format("woff2"),
+       url("fonts/ESBuild-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ES Build";
+  src: url("fonts/ESBuild-SemiBoldItalic.woff2") format("woff2"),
+       url("fonts/ESBuild-SemiBoldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ES Build";
+  src: url("fonts/ESBuild-Bold.woff2") format("woff2"),
+       url("fonts/ESBuild-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ES Build";
+  src: url("fonts/ESBuild-BoldItalic.woff2") format("woff2"),
+       url("fonts/ESBuild-BoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Neutral — slightly less geometric alt used in some body copy */
+@font-face {
+  font-family: "ES Build Neutral";
+  src: url("fonts/ESBuildNeutral-Regular.woff2") format("woff2"),
+       url("fonts/ESBuildNeutral-Regular.woff") format("woff");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "ES Build Neutral";
+  src: url("fonts/ESBuildNeutral-Medium.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "ES Build Neutral";
+  src: url("fonts/ESBuildNeutral-SemiBold.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "ES Build Neutral";
+  src: url("fonts/ESBuildNeutral-Bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* ---------- Core brand ---------- */
+  --veeam-green: #00D15F;              /* primary accent — logo fill */
+  --veeam-green-bright: #32F26F;       /* accents on dark bg */
+  --veeam-green-dark: #00B336;         /* hover / pressed */
+  --veeam-green-deep: #35B746;         /* darker inline */
+  --veeam-blue: #3700FF;               /* brand blue (buttons) */
+  --veeam-blue-600: #4800FF;           /* alt (rgb 72,0,255) */
+  --veeam-blue-deep: #002869;          /* ultra-dark */
+  --veeam-blue-royal: #095FC4;         /* links / promo fills */
+  --veeam-blue-light: #8E71F4;         /* purple-blue accent */
+  --veeam-cyan: #57E0FF;               /* highlight */
+  --veeam-cyan-pale: #E3EEFE;          /* tint bg */
+  --veeam-red: #ED2B3D;                /* error */
+  --veeam-red-deep: #D10000;           /* error dark */
+  --veeam-orange: #FE8A25;             /* warning */
+
+  /* Signature gradient (hero, promo) */
+  --veeam-gradient-brand: linear-gradient(90deg, #0E2A81 0%, #2172CA 24%, #78F6A6 55%, #CAFFDD 89%);
+  --veeam-gradient-brand-dark: linear-gradient(135deg, #00012B 0%, #043C9A 45%, rgba(33,114,202,.96) 69%, #78F6A6 97%);
+  --veeam-gradient-section: linear-gradient(180deg, #283E8E 0%, #222227 86%);
+  --veeam-gradient-cover: linear-gradient(180deg, #505861 0%, #232323 100%);
+  --veeam-gradient-hero-glow: radial-gradient(circle at 20% 50%, #00D15F 0%, rgba(0,209,95,.54) 50%, rgba(0,209,95,0) 100%);
+
+  /* ---------- Neutrals ---------- */
+  --vm-black: #000000;
+  --vm-ink: #1E1E1E;
+  --vm-ink-2: #232323;                 /* primary text */
+  --vm-ink-3: #292D32;                 /* secondary text on light */
+  --vm-slate: #505861;                 /* muted text (213× in figma) */
+  --vm-grey-500: #737373;
+  --vm-grey-400: #ADACAF;
+  --vm-grey-300: #BFBFBF;
+  --vm-grey-200: #F0F0F0;              /* borders */
+  --vm-grey-100: #F9F9F9;              /* tinted bg */
+  --vm-white: #FFFFFF;
+  --vm-off-white: #FFFBFB;
+
+  /* ---------- Semantic fg / bg ---------- */
+  --fg-1: var(--vm-ink-2);             /* primary */
+  --fg-2: var(--vm-slate);             /* secondary */
+  --fg-3: var(--vm-grey-400);          /* tertiary / disabled */
+  --fg-inverse: var(--vm-white);
+  --fg-accent: var(--veeam-green);
+  --fg-link: var(--veeam-blue);
+
+  --bg-1: var(--vm-white);
+  --bg-2: var(--vm-grey-100);          /* tinted section */
+  --bg-3: var(--vm-grey-200);
+  --bg-inverse: var(--vm-ink-2);
+  --bg-hero-dark: #131D38;             /* dark hero base */
+
+  --border-default: var(--vm-grey-200);
+  --border-strong: var(--vm-grey-400);
+  --border-accent: var(--veeam-green);
+
+  /* ---------- Radii ---------- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;                    /* buttons, inputs */
+  --radius-lg: 12px;                   /* cards */
+  --radius-xl: 16px;
+  --radius-pill: 99999px;
+
+  /* ---------- Shadow (Veeam uses teal-tinted shadows) ---------- */
+  --shadow-card:
+     0px 6px 12px 0px rgba(0, 69, 80, 0.07),
+     0px 3px 6px 0px rgba(3, 69, 80, 0.09),
+     0px 8px 20px 0px rgba(0, 69, 80, 0.05);
+  --shadow-soft: 0px 4px 12px rgba(144, 161, 185, 0.25);
+  --shadow-strong: 0px 12px 32px rgba(0, 40, 105, 0.18);
+  --shadow-inset: inset 0 1px 0 rgba(255,255,255,.06);
+
+  /* ---------- Spacing ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 120px;
+
+  /* ---------- Type ---------- */
+  --font-sans: "ES Build", "ES Build Neutral", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-display: "ES Build", "ES Build Neutral", sans-serif;
+  --font-neutral: "ES Build Neutral", "ES Build", sans-serif;
+
+  /* Display scale (used for hero titles) — very large, -1% tracking */
+  --type-display-1: 700 180px/180px var(--font-display);  /* cover */
+  --type-display-2: 700 100px/108px var(--font-display);
+  --type-display-3: 700 76px/90px var(--font-display);    /* section hero */
+  --type-display-4: 700 64px/72px var(--font-display);
+
+  /* Headings */
+  --type-h1: 700 44px/52px var(--font-display);
+  --type-h2: 700 36px/44px var(--font-display);
+  --type-h3: 600 28px/36px var(--font-display);
+  --type-h4: 600 24px/32px var(--font-display);
+  --type-h5: 600 20px/28px var(--font-display);
+  --type-h6: 600 18px/24px var(--font-display);
+
+  /* Body + UI */
+  --type-body-xl: 400 20px/28px var(--font-sans);
+  --type-body-lg: 400 18px/28px var(--font-sans);
+  --type-body: 400 16px/24px var(--font-sans);
+  --type-body-sm: 400 14px/20px var(--font-sans);
+  --type-caption: 400 12px/16px var(--font-sans);
+
+  --type-eyebrow: 600 14px/20px var(--font-sans); /* all-caps eyebrow */
+  --type-button: 700 18px/24px var(--font-sans);
+  --type-label: 600 16px/24px var(--font-sans);
+
+  --tracking-display: -0.01em;
+  --tracking-eyebrow: 0.08em;
+}
+
+/* ---------- Semantic element defaults ---------- */
+html { font-family: var(--font-sans); color: var(--fg-1); background: var(--bg-1); }
+body { font: var(--type-body); color: var(--fg-1); }
+
+h1 { font: var(--type-h1); letter-spacing: var(--tracking-display); color: var(--fg-1); margin: 0; }
+h2 { font: var(--type-h2); letter-spacing: var(--tracking-display); color: var(--fg-1); margin: 0; }
+h3 { font: var(--type-h3); color: var(--fg-1); margin: 0; }
+h4 { font: var(--type-h4); color: var(--fg-1); margin: 0; }
+h5 { font: var(--type-h5); color: var(--fg-1); margin: 0; }
+h6 { font: var(--type-h6); color: var(--fg-1); margin: 0; }
+p  { font: var(--type-body); color: var(--fg-1); margin: 0; }
+
+small { font: var(--type-body-sm); color: var(--fg-2); }
+
+a {
+  color: var(--fg-link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+a:hover { color: var(--veeam-green-dark); border-bottom-color: currentColor; }
+
+/* Eyebrow label — appears above heroes/sections */
+.eyebrow {
+  font: var(--type-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--veeam-green);
+  display: inline-block;
+}
+
+/* Display helpers */
+.display-1 { font: var(--type-display-1); letter-spacing: var(--tracking-display); }
+.display-2 { font: var(--type-display-2); letter-spacing: var(--tracking-display); }
+.display-3 { font: var(--type-display-3); letter-spacing: var(--tracking-display); }
+.display-4 { font: var(--type-display-4); letter-spacing: var(--tracking-display); }
+
+/* Gradient text (used for bold callouts like "Agent Commander") */
+.text-gradient {
+  background: linear-gradient(90deg, #3700FF 0%, #00D15F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

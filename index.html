@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Veeam · Thank You — M365 Data Resilience, Korea</title>
+  <link rel="stylesheet" href="assets/veeam-tokens.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      color: var(--vm-ink-2);
+      background: var(--vm-white);
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    .eyebrow {
+      font: 700 13px/18px var(--font-sans);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--veeam-green); margin: 0 0 14px;
+    }
+
+    /* ============ HERO ============ */
+    .hero {
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(0,209,95,.30) 0%, transparent 44%),
+        radial-gradient(circle at 90% 84%, rgba(87,224,255,.24) 0%, transparent 46%),
+        linear-gradient(135deg, #00012B 0%, #0E2A81 58%, #2172CA 100%);
+      color: #fff;
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(120,246,166,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,246,166,.05) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+    .hero .wrap { position: relative; z-index: 2; padding-top: 38px; padding-bottom: 78px; }
+    .hero-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; margin-bottom: 64px; flex-wrap: wrap;
+    }
+    .hero-bar .brand { display: flex; align-items: center; gap: 16px; }
+    .hero-bar .brand img { height: 30px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 8px 16px; border: 1.5px solid rgba(120,246,166,.42);
+      border-radius: 999px; background: rgba(0,209,95,.08);
+      font: 700 12px/16px var(--font-sans);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--veeam-green-bright);
+    }
+    .pill .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--veeam-green-bright); box-shadow: 0 0 10px var(--veeam-green-bright);
+    }
+    .hero-bar .meta {
+      font: 600 13px/18px var(--font-sans); letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,.55);
+    }
+    .hero h1 {
+      font: 700 64px/66px var(--font-display); letter-spacing: -0.02em;
+      margin: 0 0 22px; max-width: 16ch; color: #fff;
+    }
+    .hero h1 .ko { display: block; font-size: 40px; line-height: 1; color: var(--veeam-green-bright); margin-bottom: 12px; letter-spacing: 0; }
+    .hero h1 .accent {
+      background: linear-gradient(90deg, #78F6A6 0%, #57E0FF 60%, #8E71F4 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p.lede {
+      font: 400 20px/30px var(--font-sans); color: rgba(255,255,255,.82);
+      max-width: 60ch; margin: 0 0 34px;
+    }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 26px; border-radius: 8px; cursor: pointer;
+      font: 700 16px/20px var(--font-sans); text-decoration: none;
+      border: 1.5px solid transparent; transition: transform .12s, box-shadow .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--veeam-green); color: #00231A; box-shadow: 0 8px 24px rgba(0,209,95,.35); }
+    .btn-primary:hover { background: var(--veeam-green-bright); }
+    .btn-ghost { color: #fff; border-color: rgba(255,255,255,.32); }
+    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
+
+    /* ============ SECTION SCAFFOLD ============ */
+    section.block { padding: 86px 0; }
+    .section-head { max-width: 56ch; margin-bottom: 44px; }
+    .section-head h2 {
+      font: 700 40px/46px var(--font-display); letter-spacing: -0.02em; margin: 0 0 14px;
+    }
+    .section-head p { font: 400 18px/28px var(--font-sans); color: var(--vm-slate); margin: 0; }
+
+    /* ============ SUMMARY CARDS ============ */
+    .summary { background: var(--vm-grey-100); }
+    .sum-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .sum-card {
+      background: #fff; border: 1px solid var(--vm-grey-200); border-radius: 20px;
+      padding: 30px 28px; box-shadow: var(--shadow-soft);
+      display: flex; flex-direction: column;
+    }
+    .sum-card .ix {
+      width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+      font: 700 20px/1 var(--font-display); color: #fff; margin-bottom: 20px;
+    }
+    .sum-card:nth-child(1) .ix { background: linear-gradient(135deg, #3700FF, #095FC4); }
+    .sum-card:nth-child(2) .ix { background: linear-gradient(135deg, #FE8A25, #ED5765); }
+    .sum-card:nth-child(3) .ix { background: linear-gradient(135deg, #00D15F, #78F6A6); }
+    .sum-card h3 { font: 700 22px/28px var(--font-display); margin: 0 0 10px; letter-spacing: -0.01em; }
+    .sum-card p { font: 400 16px/24px var(--font-sans); color: var(--vm-slate); margin: 0; }
+    .sum-card p strong { color: var(--veeam-green-dark); font-weight: 700; }
+    .sum-card .tag {
+      margin-top: 16px; font: 700 12px/16px var(--font-sans); letter-spacing: 0.06em;
+      color: var(--veeam-blue); text-transform: uppercase;
+    }
+
+    /* ============ QUIZ ============ */
+    .quiz { background: #fff; }
+    .quiz-layout { display: grid; grid-template-columns: 1fr 340px; gap: 36px; align-items: start; }
+    .q-card {
+      border: 1px solid var(--vm-grey-200); border-radius: 22px; overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .q-head {
+      background: linear-gradient(135deg, #0E2A81, #2172CA); color: #fff;
+      padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .q-head h3 { font: 700 22px/26px var(--font-display); margin: 0 0 4px; letter-spacing: -0.01em; color: #fff; }
+    .q-head p { font: 400 14px/18px var(--font-sans); color: rgba(255,255,255,.7); margin: 0; }
+    .q-head .count {
+      font: 700 22px/1 var(--font-display); color: var(--veeam-green-bright);
+      white-space: nowrap; text-align: right;
+    }
+    .q-head .count small { display: block; font: 600 11px/14px var(--font-sans); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 4px; }
+    .q-list { padding: 12px; }
+    .q-item {
+      display: flex; align-items: center; gap: 16px; padding: 15px 16px;
+      border-radius: 12px; cursor: pointer; transition: background .15s;
+      border: 1px solid transparent;
+    }
+    .q-item:hover { background: var(--vm-grey-100); }
+    .q-item .box {
+      flex: none; width: 26px; height: 26px; border-radius: 8px;
+      border: 2px solid var(--vm-grey-300); background: #fff;
+      display: grid; place-items: center; transition: all .15s;
+    }
+    .q-item .box svg { opacity: 0; transform: scale(.5); transition: all .15s; }
+    .q-item.is-on .box { background: var(--veeam-green); border-color: var(--veeam-green); }
+    .q-item.is-on .box svg { opacity: 1; transform: scale(1); }
+    .q-item .label { font: 500 16px/22px var(--font-sans); color: var(--vm-ink-2); }
+    .q-item.is-on .label { color: var(--veeam-green-dark); }
+
+    /* score side panel */
+    .q-side { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 18px; }
+    .q-ring-card {
+      border: 1px solid var(--vm-grey-200); border-radius: 22px; padding: 28px 24px;
+      text-align: center; box-shadow: var(--shadow-soft); background: #fff;
+    }
+    .q-ring { position: relative; width: 200px; height: 200px; margin: 4px auto 8px; }
+    .q-ring svg { transform: rotate(-90deg); }
+    .q-ring .pct { position: absolute; inset: 0; display: grid; place-content: center;
+      font: 700 46px/1 var(--font-display); letter-spacing: -0.02em; color: var(--vm-ink-2); }
+    .q-ring-card .lbl { font: 600 13px/18px var(--font-sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--vm-slate); }
+    .q-reset {
+      margin-top: 16px; background: none; border: 1px solid var(--vm-grey-300);
+      color: var(--vm-slate); padding: 9px 18px; border-radius: 999px; cursor: pointer;
+      font: 600 13px/16px var(--font-sans); transition: all .15s;
+    }
+    .q-reset:hover { border-color: var(--vm-slate); color: var(--vm-ink-2); }
+
+    .q-result {
+      border: 1.5px dashed var(--vm-grey-300); border-radius: 22px; padding: 24px;
+      text-align: center; opacity: .55; transition: opacity .3s; background: var(--vm-grey-100);
+    }
+    .q-result.is-live { opacity: 1; border-style: solid; border-color: var(--veeam-green); background: #fff; }
+    .q-result .rh { font: 600 12px/16px var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--vm-slate); margin-bottom: 8px; }
+    .q-result .rname { font: 700 30px/34px var(--font-display); letter-spacing: -0.01em; }
+    .q-result .rname [data-r-hangul] { color: var(--veeam-green); }
+    .q-result .rtitle { font: 600 14px/18px var(--font-sans); color: var(--vm-slate); margin: 2px 0 12px; }
+    .q-result .rmsg { font: 400 15px/22px var(--font-sans); color: var(--vm-ink-3); }
+
+    /* ============ BUDDIES ============ */
+    .buddies { background: var(--vm-grey-100); }
+    .buddy-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .buddy {
+      background: #fff; border: 1.5px solid var(--vm-grey-200); border-radius: 22px;
+      padding: 22px 20px 24px; text-align: center; position: relative; overflow: hidden;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .buddy::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--bar); }
+    .buddy[data-buddy="kongi"]  { --bar: linear-gradient(90deg,#FE8A25,#FFC355); --ac:#FE8A25; }
+    .buddy[data-buddy="bangul"] { --bar: linear-gradient(90deg,#FFC355,#FDE89A); --ac:#E0A21E; }
+    .buddy[data-buddy="gureum"] { --bar: linear-gradient(90deg,#57E0FF,#8E71F4); --ac:#2C9FCB; }
+    .buddy[data-buddy="horang"] { --bar: linear-gradient(90deg,#00D15F,#78F6A6); --ac:#00B336; }
+    .buddy.is-match { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,40,105,.16); border-color: var(--ac); }
+    .buddy.is-match::after {
+      content: "Your match"; position: absolute; top: 14px; right: 14px;
+      font: 700 10px/1 var(--font-sans); letter-spacing: 0.1em; text-transform: uppercase;
+      color: #fff; background: var(--ac); padding: 6px 9px; border-radius: 999px;
+    }
+    .buddy .stage { height: 172px; display: grid; place-items: center; margin-bottom: 6px; position: relative; }
+    .buddy .stage::before {
+      content: ""; position: absolute; inset: 0; margin: auto;
+      width: 152px; height: 152px; border-radius: 50%; z-index: 0;
+      background: radial-gradient(circle, var(--ac) 0%, transparent 66%);
+      opacity: .18; filter: blur(8px);
+    }
+    .buddy .stage svg {
+      width: 152px; height: 170px; position: relative; z-index: 1;
+      transform-origin: 50% 74%; animation: bd-float 3.6s ease-in-out infinite;
+    }
+    .buddy:nth-child(2) .stage svg { animation-delay: .5s; }
+    .buddy:nth-child(3) .stage svg { animation-delay: 1s; }
+    .buddy:nth-child(4) .stage svg { animation-delay: 1.5s; }
+    @keyframes bd-float { 0%,100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-8px) rotate(1.5deg); } }
+    .buddy .stage svg .eyes { transform-box: fill-box; transform-origin: center; animation: bd-blink 4.4s infinite; }
+    .buddy:nth-child(2) .stage svg .eyes { animation-delay: .9s; }
+    .buddy:nth-child(3) .stage svg .eyes { animation-delay: 1.7s; }
+    .buddy:nth-child(4) .stage svg .eyes { animation-delay: 2.5s; }
+    @keyframes bd-blink { 0%,91%,100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+    .buddy .stage svg .spark, .buddy .stage svg .spark2 { transform-box: fill-box; transform-origin: center; animation: bd-tw 2.2s ease-in-out infinite; }
+    .buddy .stage svg .spark2 { animation-delay: 1.1s; }
+    @keyframes bd-tw { 0%,100% { opacity: .25; transform: scale(.5) rotate(0deg); } 50% { opacity: 1; transform: scale(1.15) rotate(45deg); } }
+    .buddy:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,40,105,.16); }
+    .buddy:hover .stage svg { animation: bd-wiggle .55s ease-in-out infinite; }
+    @keyframes bd-wiggle { 0%,100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+    .buddy.is-match .stage svg { animation: bd-bounce .85s ease-in-out infinite; }
+    @keyframes bd-bounce { 0%,100% { transform: translateY(0) scale(1); } 28% { transform: translateY(-14px) scale(1.06); } 55% { transform: translateY(0) scale(.98); } }
+    .buddy.is-match .stage::before { animation: bd-glow 1.4s ease-in-out infinite; }
+    @keyframes bd-glow { 0%,100% { opacity: .28; transform: scale(.92); } 50% { opacity: .55; transform: scale(1.08); } }
+    @media (prefers-reduced-motion: reduce) {
+      .buddy .stage svg, .buddy .stage svg .eyes, .buddy .stage svg .spark, .buddy .stage svg .spark2, .buddy.is-match .stage::before { animation: none !important; }
+    }
+    .buddy .range { font: 700 12px/16px var(--font-sans); letter-spacing: 0.1em; color: var(--ac); margin-bottom: 8px; }
+    .buddy .bname { font: 700 24px/28px var(--font-display); letter-spacing: -0.01em; margin: 0; }
+    .buddy .bname span { color: var(--ac); font-size: 18px; }
+    .buddy .btier { font: 600 13px/18px var(--font-sans); color: var(--vm-slate); margin: 2px 0 12px; }
+    .buddy .bdesc { font: 400 14px/20px var(--font-sans); color: var(--vm-ink-3); margin: 0; }
+
+    /* ============ CONTACT ============ */
+    .contact { background: linear-gradient(135deg, #00012B 0%, #0E2A81 70%, #2172CA 100%); color: #fff; }
+    .contact .wrap { text-align: center; }
+    .contact h2 { font: 700 44px/48px var(--font-display); letter-spacing: -0.02em; margin: 0 0 16px; color: #fff; }
+    .contact h2 .ko { display:block; font-size: 28px; color: var(--veeam-green-bright); margin-bottom: 10px; }
+    .contact p { font: 400 19px/28px var(--font-sans); color: rgba(255,255,255,.82); max-width: 56ch; margin: 0 auto 30px; }
+    .contact .hosts { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 46px; color: rgba(255,255,255,.7); font: 400 15px/22px var(--font-sans); }
+    .contact .hosts strong { display: block; color: #fff; font: 700 17px/24px var(--font-display); }
+    .foot {
+      border-top: 1px solid rgba(255,255,255,.12); margin-top: 56px; padding-top: 26px;
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      font: 400 13px/18px var(--font-sans); color: rgba(255,255,255,.5);
+    }
+    .foot img { height: 22px; opacity: .9; }
+
+    @media (max-width: 880px) {
+      .hero h1 { font-size: 44px; line-height: 48px; }
+      .hero h1 .ko { font-size: 30px; }
+      .sum-grid, .buddy-grid { grid-template-columns: 1fr 1fr; }
+      .quiz-layout { grid-template-columns: 1fr; }
+      .q-side { position: static; }
+    }
+    @media (max-width: 880px) {
+      section.block { padding: 60px 0; }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      section.block { padding: 48px 0; }
+      .hero .wrap { padding-top: 24px; padding-bottom: 52px; }
+      .hero-bar { margin-bottom: 32px; flex-direction: column; align-items: flex-start; gap: 12px; }
+      .hero-bar .meta { font-size: 11px; }
+      .pill { font-size: 11px; padding: 6px 12px; }
+      .hero h1 { font-size: 34px; line-height: 38px; }
+      .hero h1 .ko { font-size: 22px; }
+      .hero p.lede { font-size: 16px; line-height: 25px; }
+      .hero-cta { flex-direction: column; }
+      .hero-cta .btn { width: 100%; justify-content: center; }
+      .sum-grid, .buddy-grid { grid-template-columns: 1fr; }
+      .section-head h2 { font-size: 28px; line-height: 34px; }
+      .section-head p { font-size: 16px; }
+      .q-head { flex-wrap: wrap; gap: 8px; }
+      .q-head .count { font-size: 18px; }
+      .q-item { padding: 12px 14px; gap: 12px; }
+      .q-item .label { font-size: 15px; }
+      .q-ring { width: 160px; height: 160px; }
+      .q-ring svg { width: 160px; height: 160px; }
+      .q-ring .pct { font-size: 38px; }
+      .buddy .stage { height: 130px; }
+      .buddy .stage svg { width: 120px; height: 136px; }
+      .contact h2 { font-size: 30px; line-height: 34px; }
+      .contact h2 .ko { font-size: 20px; }
+      .contact p { font-size: 16px; line-height: 25px; }
+      .contact .hosts { gap: 20px; flex-direction: column; align-items: center; }
+      .contact .hosts > div { text-align: center; }
+      .foot { flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+    }
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 28px; line-height: 32px; }
+      .hero h1 .ko { font-size: 20px; }
+      .sum-card { padding: 24px 20px; }
+      .btn { padding: 14px 20px; font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" data-screen-label="Hero · Thank you">
+    <div class="wrap">
+      <div class="hero-bar">
+        <div class="brand">
+          <img src="assets/veeam-logo.svg" alt="Veeam" />
+          <span class="pill"><span class="dot"></span>Veeam + Microsoft · Korea</span>
+        </div>
+        <span class="meta">M365 Data Resilience · June 2026</span>
+      </div>
+
+      <h1>
+        <span class="ko">감사합니다</span>
+        Thank you for joining us.
+      </h1>
+      <p class="lede">It was a pleasure hosting you. Here's a short recap of what we covered — plus a 1-minute resilience check to see which Veeam buddy your organisation is today. <span class="accent">No long reading required.</span></p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#quiz">Take the 1-minute check
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m-4-4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#contact">Talk to our team</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ SUMMARY ============ -->
+  <section class="block summary" data-screen-label="Summary points">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Your AI journey, protected</p>
+        <h2>Three takeaways for the agentic era.</h2>
+      </div>
+      <div class="sum-grid">
+        <div class="sum-card">
+          <div class="ix">1</div>
+          <h3>Microsoft governs the agents.</h3>
+          <p>M365 E7 and Agent 365 manage your AI agents brilliantly. But governing an agent isn't backing up the data it touches.</p>
+          <span class="tag">M365 E7 · Agent 365</span>
+        </div>
+        <div class="sum-card">
+          <div class="ix">2</div>
+          <h3>Agents rewrite data at machine speed.</h3>
+          <p>One bad prompt can cascade in seconds. Veeam's point-in-time rollback winds the clock back and undoes it in minutes.</p>
+          <span class="tag">Point-in-time rollback</span>
+        </div>
+        <div class="sum-card">
+          <div class="ix">3</div>
+          <h3>Veeam protects what your AI runs on.</h3>
+          <p>Immutable, off-tenant backup of M365 and Entra ID — audit-ready for PIPA and ISMS-P. Microsoft governs; <strong>Veeam recovers.</strong></p>
+          <span class="tag">VDC for M365</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="block quiz" id="quiz" data-screen-label="Mini quiz">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">1-minute check · 12 questions</p>
+        <h2>Which buddy is your organisation?</h2>
+        <p>Tick every statement that's already true for you. There are no wrong answers — each tick just tells us where to start the conversation. Your match appears live on the right.</p>
+      </div>
+
+      <div class="quiz-layout">
+        <div class="q-card">
+          <div class="q-head">
+            <div>
+              <h3>Data Resilience Check</h3>
+              <p>12 quick yes/no statements · ~1 minute</p>
+            </div>
+            <div class="count"><small>Ticked</small><span data-q-count>0 / 12</span></div>
+          </div>
+          <div class="q-list">
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">We know exactly which work stops if Microsoft 365 is down for a day.</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">We back up Microsoft 365 beyond Microsoft's built-in retention.</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">At least one copy of our data lives safely outside our tenant.</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">Our backups cannot be deleted, even by an administrator (immutable).</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">We have visibility and control over the data our AI agents access and edit.</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">We have a plan if a top administrator account were ever compromised.</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">We've practiced restoring Entra ID (users, groups, policies) in the last year.</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">We know our retention rules for employees who have left.</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">We can fulfil an audit or data-retrieval request on time.</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">Our backup posture is mapped to PIPA and ISMS-P expectations.</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">We've tested our recovery plan end-to-end in the last 12 months.</div></div>
+            <div class="q-item"><div class="box"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">We know our backup-hardware refresh timing and have compared it to cloud.</div></div>
+          </div>
+        </div>
+
+        <aside class="q-side">
+          <div class="q-ring-card">
+            <div class="q-ring">
+              <svg viewBox="0 0 200 200" width="200" height="200">
+                <circle cx="100" cy="100" r="86" fill="none" stroke="#F0F0F0" stroke-width="14"/>
+                <circle class="arc" cx="100" cy="100" r="86" fill="none" stroke="#FE8A25" stroke-width="14" stroke-linecap="round" stroke-dasharray="540" stroke-dashoffset="540" style="transition: stroke-dashoffset .45s ease, stroke .45s ease;"/>
+              </svg>
+              <div class="pct">0%</div>
+            </div>
+            <div class="lbl">Resilient today</div>
+            <button class="q-reset" type="button" data-q-reset>Reset answers</button>
+          </div>
+          <div class="q-result">
+            <div class="rh">Your buddy</div>
+            <div class="rname"><span data-r-hangul>콩이</span> <span data-r-name>Kongi</span></div>
+            <div class="rtitle" data-r-title>The Sprout</div>
+            <div class="rmsg" data-r-msg>Tick the statements that are true to meet your buddy.</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUDDIES ============ -->
+  <section class="block buddies" data-screen-label="Characters">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Meet the four buddies</p>
+        <h2>Every buddy is on the way up.</h2>
+        <p>Four friendly profiles, from just-getting-started to gold-standard. Wherever you land, there's a clear, encouraging next step.</p>
+      </div>
+      <div class="buddy-grid">
+
+        <!-- KONGI — sprout -->
+        <div class="buddy" data-buddy="kongi">
+          <div class="stage">
+            <svg viewBox="0 0 150 168" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="kongiB" cx="40%" cy="34%" r="74%"><stop offset="0%" stop-color="#FCFFFA"/><stop offset="58%" stop-color="#E7FBED"/><stop offset="100%" stop-color="#C7F1D4"/></radialGradient>
+                <radialGradient id="kongiC" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FF8FA6"/><stop offset="100%" stop-color="#FF8FA6" stop-opacity="0"/></radialGradient>
+              </defs>
+              <ellipse cx="75" cy="158" rx="34" ry="6" fill="rgba(0,0,0,.07)"/>
+              <path d="M75 54 C75 38 74 26 75 16" stroke="#1FB85A" stroke-width="5" stroke-linecap="round" fill="none"/>
+              <path d="M74 32 C64 22 50 23 45 31 C54 42 69 41 74 34 Z" fill="#37CE6E"/>
+              <path d="M76 26 C84 12 99 12 104 21 C95 32 82 31 76 27 Z" fill="#55E889"/>
+              <ellipse cx="75" cy="100" rx="47" ry="45" fill="url(#kongiB)" stroke="#B6E9C5" stroke-width="2.5"/>
+              <path d="M31 100 q-13 3 -13 16" stroke="#D6F5DE" stroke-width="12" fill="none" stroke-linecap="round"/>
+              <path d="M119 100 q13 3 13 16" stroke="#D6F5DE" stroke-width="12" fill="none" stroke-linecap="round"/>
+              <ellipse class="cheek" cx="44" cy="112" rx="9" ry="6.5" fill="url(#kongiC)"/>
+              <ellipse class="cheek" cx="106" cy="112" rx="9" ry="6.5" fill="url(#kongiC)"/>
+              <g class="eyes" fill="#3A2E26">
+                <ellipse cx="59" cy="99" rx="9" ry="10.5"/><ellipse cx="91" cy="99" rx="9" ry="10.5"/>
+                <circle cx="55.5" cy="94.5" r="3.4" fill="#fff"/><circle cx="87.5" cy="94.5" r="3.4" fill="#fff"/>
+                <circle cx="62" cy="103" r="1.7" fill="#fff" opacity=".85"/><circle cx="94" cy="103" r="1.7" fill="#fff" opacity=".85"/>
+              </g>
+              <path d="M68 113 Q75 122 82 113 Q75 117 68 113 Z" fill="#E26781"/>
+              <g class="spark" fill="#FFD56B"><path d="M125 56 l2.4 6 6 2.4 -6 2.4 -2.4 6 -2.4 -6 -6 -2.4 6 -2.4 Z"/></g>
+              <g class="spark2" fill="#9BE6B4"><circle cx="24" cy="62" r="3.2"/></g>
+            </svg>
+          </div>
+          <div class="range">0 – 24%</div>
+          <h3 class="bname">Kongi <span>콩이</span></h3>
+          <div class="btier">The Sprout · Starting line</div>
+          <p class="bdesc">Just planted, full of potential. A few smart first moves protect everything that grows next.</p>
+        </div>
+
+        <!-- BANGUL — dewdrop -->
+        <div class="buddy" data-buddy="bangul">
+          <div class="stage">
+            <svg viewBox="0 0 150 168" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="banB" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E8F9FF"/><stop offset="55%" stop-color="#BFEBFF"/><stop offset="100%" stop-color="#8AD4F5"/></linearGradient>
+                <radialGradient id="banC" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FF8FA6"/><stop offset="100%" stop-color="#FF8FA6" stop-opacity="0"/></radialGradient>
+              </defs>
+              <ellipse cx="75" cy="158" rx="32" ry="6" fill="rgba(0,0,0,.07)"/>
+              <path d="M75 24 C45 74 41 102 41 112 a34 34 0 0 0 68 0 C109 102 105 74 75 24 Z" fill="url(#banB)" stroke="#7FCBEE" stroke-width="2.5"/>
+              <path d="M61 66 C52 82 51 96 55 106 C61 96 64 80 69 68 C66 65 63 64 61 66 Z" fill="#fff" opacity=".6"/>
+              <path d="M30 110 q-12 4 -10 16" stroke="#A4DEF6" stroke-width="11" fill="none" stroke-linecap="round"/>
+              <path d="M120 110 q12 4 10 16" stroke="#A4DEF6" stroke-width="11" fill="none" stroke-linecap="round"/>
+              <ellipse class="cheek" cx="49" cy="118" rx="8.5" ry="6" fill="url(#banC)"/>
+              <ellipse class="cheek" cx="101" cy="118" rx="8.5" ry="6" fill="url(#banC)"/>
+              <g class="eyes" fill="#2E3A40">
+                <ellipse cx="61" cy="106" rx="8.5" ry="10"/><ellipse cx="89" cy="106" rx="8.5" ry="10"/>
+                <circle cx="58" cy="101.5" r="3.2" fill="#fff"/><circle cx="86" cy="101.5" r="3.2" fill="#fff"/>
+                <circle cx="64" cy="110" r="1.6" fill="#fff" opacity=".85"/><circle cx="92" cy="110" r="1.6" fill="#fff" opacity=".85"/>
+              </g>
+              <path d="M68 119 Q75 127 82 119 Q75 122 68 119 Z" fill="#3E6E84"/>
+              <g class="spark" fill="#CFF1FF"><path d="M120 94 l2.2 5.6 5.6 2.2 -5.6 2.2 -2.2 5.6 -2.2 -5.6 -5.6 -2.2 5.6 -2.2 Z"/></g>
+              <g class="spark2" fill="#FFFFFF"><circle cx="110" cy="42" r="3.2"/></g>
+            </svg>
+          </div>
+          <div class="range">25 – 54%</div>
+          <h3 class="bname">Bangul <span>방울</span></h3>
+          <div class="btier">The Dewdrop · Building</div>
+          <p class="bdesc">Fundamentals are taking shape. A little focus on immutability and recovery and you're flying.</p>
+        </div>
+
+        <!-- GUREUM — cloud -->
+        <div class="buddy" data-buddy="gureum">
+          <div class="stage">
+            <svg viewBox="0 0 150 168" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="gurB" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FCFCFF"/><stop offset="100%" stop-color="#E6E1FA"/></linearGradient>
+                <radialGradient id="gurC" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FF9DC4"/><stop offset="100%" stop-color="#FF9DC4" stop-opacity="0"/></radialGradient>
+              </defs>
+              <ellipse cx="75" cy="158" rx="42" ry="6" fill="rgba(0,0,0,.07)"/>
+              <g fill="url(#gurB)" stroke="#D7D1F0" stroke-width="2.5">
+                <circle cx="48" cy="96" r="27"/><circle cx="102" cy="96" r="27"/><circle cx="63" cy="72" r="25"/><circle cx="92" cy="76" r="22"/>
+              </g>
+              <rect x="26" y="90" width="98" height="42" rx="21" fill="url(#gurB)"/>
+              <g fill="url(#gurB)"><circle cx="48" cy="96" r="24.5"/><circle cx="102" cy="96" r="24.5"/><circle cx="63" cy="72" r="22.5"/><circle cx="92" cy="76" r="19.5"/></g>
+              <ellipse class="cheek" cx="50" cy="108" rx="9" ry="6.5" fill="url(#gurC)"/>
+              <ellipse class="cheek" cx="100" cy="108" rx="9" ry="6.5" fill="url(#gurC)"/>
+              <g class="eyes" fill="#3A3550">
+                <ellipse cx="60" cy="98" rx="8.5" ry="10.5"/><ellipse cx="90" cy="98" rx="8.5" ry="10.5"/>
+                <circle cx="56.5" cy="93.5" r="3.2" fill="#fff"/><circle cx="86.5" cy="93.5" r="3.2" fill="#fff"/>
+                <circle cx="63" cy="102" r="1.6" fill="#fff" opacity=".85"/><circle cx="93" cy="102" r="1.6" fill="#fff" opacity=".85"/>
+              </g>
+              <path d="M66 110 Q75 120 84 110 Q75 115 66 110 Z" fill="#C56A8C"/>
+              <g class="spark" fill="#B9A8F0"><path d="M120 60 l2.4 6 6 2.4 -6 2.4 -2.4 6 -2.4 -6 -6 -2.4 6 -2.4 Z"/></g>
+              <g class="spark2" fill="#57E0FF"><circle cx="26" cy="58" r="3.2"/></g>
+            </svg>
+          </div>
+          <div class="range">55 – 84%</div>
+          <h3 class="bname">Gureum <span>구름</span></h3>
+          <div class="btier">The Cloud · Resilience-ready</div>
+          <p class="bdesc">Already strong. The last stretch is usually identity rollback and signed-off recovery targets.</p>
+        </div>
+
+        <!-- HORANG — tiger -->
+        <div class="buddy" data-buddy="horang">
+          <div class="stage">
+            <svg viewBox="0 0 150 172" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="horB" cx="42%" cy="34%" r="74%"><stop offset="0%" stop-color="#FFD79A"/><stop offset="55%" stop-color="#FCB45C"/><stop offset="100%" stop-color="#F59A33"/></radialGradient>
+                <radialGradient id="horC" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FF7E9B"/><stop offset="100%" stop-color="#FF7E9B" stop-opacity="0"/></radialGradient>
+                <linearGradient id="horK" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFE792"/><stop offset="100%" stop-color="#F5B53A"/></linearGradient>
+              </defs>
+              <ellipse cx="75" cy="162" rx="38" ry="6" fill="rgba(0,0,0,.08)"/>
+              <circle cx="43" cy="56" r="15" fill="#FCB45C" stroke="#E2872A" stroke-width="2.5"/>
+              <circle cx="107" cy="56" r="15" fill="#FCB45C" stroke="#E2872A" stroke-width="2.5"/>
+              <circle cx="43" cy="57" r="7.5" fill="#FFC2C2"/>
+              <circle cx="107" cy="57" r="7.5" fill="#FFC2C2"/>
+              <ellipse cx="40" cy="142" rx="13" ry="10" fill="#FCB45C" stroke="#E2872A" stroke-width="2.5"/>
+              <ellipse cx="110" cy="142" rx="13" ry="10" fill="#FCB45C" stroke="#E2872A" stroke-width="2.5"/>
+              <circle cx="75" cy="100" r="50" fill="url(#horB)" stroke="#E2872A" stroke-width="2.5"/>
+              <ellipse cx="75" cy="110" rx="34" ry="30" fill="#FFF3E0"/>
+              <path d="M75 54 l-5 15 M75 54 l5 15" stroke="#C9701A" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <path d="M30 88 q8 5 0 12 M120 88 q-8 5 0 12" stroke="#C9701A" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <ellipse class="cheek" cx="45" cy="110" rx="9" ry="6.5" fill="url(#horC)"/>
+              <ellipse class="cheek" cx="105" cy="110" rx="9" ry="6.5" fill="url(#horC)"/>
+              <g class="eyes" fill="#3A2A1E">
+                <ellipse cx="60" cy="96" rx="9.5" ry="11.5"/><ellipse cx="90" cy="96" rx="9.5" ry="11.5"/>
+                <circle cx="56.5" cy="91" r="3.6" fill="#fff"/><circle cx="86.5" cy="91" r="3.6" fill="#fff"/>
+                <circle cx="63" cy="100" r="1.8" fill="#fff" opacity=".85"/><circle cx="93" cy="100" r="1.8" fill="#fff" opacity=".85"/>
+              </g>
+              <path d="M70 107 L80 107 L75 113 Z" fill="#C9526A"/>
+              <path d="M75 113 Q67 120 60 116 M75 113 Q83 120 90 116" stroke="#3A2A1E" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <g stroke="#E2A86A" stroke-width="2" stroke-linecap="round"><path d="M41 106 h15"/><path d="M41 114 h14"/><path d="M109 106 h-15"/><path d="M109 114 h-14"/></g>
+              <path d="M57 38 L66 25 L75 34 L84 25 L93 38 Z" fill="url(#horK)" stroke="#E0982A" stroke-width="2" stroke-linejoin="round"/>
+              <circle cx="66" cy="25" r="2.6" fill="#FF7E9B"/><circle cx="84" cy="25" r="2.6" fill="#57E0FF"/><circle cx="75" cy="34" r="2.6" fill="#7CFFB0"/>
+              <g class="spark" fill="#FFE38A"><path d="M126 72 l2.6 6.4 6.4 2.6 -6.4 2.6 -2.6 6.4 -2.6 -6.4 -6.4 -2.6 6.4 -2.6 Z"/></g>
+              <g class="spark2" fill="#FFFFFF"><circle cx="22" cy="76" r="3.2"/></g>
+            </svg>
+          </div>
+          <div class="range">85 – 100%</div>
+          <h3 class="bname">Horang <span>호랑</span></h3>
+          <div class="btier">The Tiger · Gold standard</div>
+          <p class="bdesc">Audit-ready and confident — exactly what an AI-ready Korean organisation looks like. 멋져요!</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="block contact" id="contact" data-screen-label="Contact">
+    <div class="wrap">
+      <h2 style="color:#fff;"><span class="ko">함께 시작해요</span><span style="color:#fff;">Let's take the next step together.</span></h2>
+      <p>Whichever buddy you matched, we'll bring a focused 30-minute session tailored to your result.</p>
+      <a class="btn btn-primary" href="mailto:s.park@veeam.com?subject=M365%20Resilience%20follow-up">Book a follow-up</a>
+
+      <div class="hosts">
+        <div><strong>Sungjin Park</strong>Lead Alliances Manager, Veeam Korea</div>
+        <div><strong>Microsoft 365</strong>Better together</div>
+      </div>
+
+      <div class="foot">
+        <img src="assets/veeam-logo.svg" alt="Veeam" />
+        <span>© 2026 Veeam Software · Seoul, Korea · M365 Data Resilience</span>
+      </div>
+    </div>
+  </section>
+
+  <script src="assets/korea-quiz.js"></script>
+</body>
+</html>
