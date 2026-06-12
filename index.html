@@ -307,59 +307,77 @@
       .btn { padding: 14px 20px; font-size: 15px; }
     }
     /* ============ GATE OVERLAY ============ */
+    /* ── GATE ── */
     #vg-overlay {
       position: fixed; inset: 0; z-index: 9999;
       background: linear-gradient(135deg, #00012B 0%, #0E2A81 58%, #2172CA 100%);
-      display: flex; align-items: center; justify-content: center;
-      padding: 20px; overflow-y: auto;
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 32px 16px; overflow-y: auto;
     }
     #vg-modal {
-      background: #fff; border-radius: 24px; padding: 40px 44px;
-      max-width: 620px; width: 100%; box-shadow: 0 24px 64px rgba(0,0,40,.35);
-      max-height: 90vh; overflow-y: auto;
+      background: #fff; border-radius: 20px; padding: 32px 36px 36px;
+      max-width: 540px; width: 100%; box-shadow: 0 24px 64px rgba(0,0,40,.4);
     }
-    #vg-logo { height: 36px; margin-bottom: 24px; display: block; }
-    #vg-title { font: 700 26px/32px var(--font-display); letter-spacing: -0.02em; margin: 0 0 8px; color: var(--vm-ink-2); }
-    #vg-sub { font: 400 15px/22px var(--font-sans); color: var(--vm-slate); margin: 0 0 28px; }
-    .vg-q { margin-bottom: 24px; }
-    .vg-qlabel { display: block; font: 600 14px/20px var(--font-sans); color: var(--vm-ink-2); margin-bottom: 10px; }
+    #vg-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    #vg-logo { height: 30px; display: block; }
+    #vg-badge { font: 600 11px/1 var(--font-sans); letter-spacing: .1em; text-transform: uppercase; color: var(--vm-slate); background: var(--vm-grey-100); padding: 5px 10px; border-radius: 999px; }
+    #vg-title { font: 700 22px/28px var(--font-display); letter-spacing: -0.02em; margin: 0 0 4px; color: var(--vm-ink-2); }
+    #vg-sub { font: 400 13px/18px var(--font-sans); color: var(--vm-slate); margin: 0 0 24px; }
+    /* divider */
+    .vg-divider { height: 1px; background: var(--vm-grey-200); margin: 0 0 20px; }
+    /* name/email row */
+    .vg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+    .vg-field { display: flex; flex-direction: column; gap: 5px; }
+    .vg-field label { font: 600 11px/14px var(--font-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--vm-slate); }
+    .vg-field input {
+      border: 1.5px solid var(--vm-grey-200); border-radius: 8px;
+      padding: 9px 12px; font: 400 14px/18px var(--font-sans); color: var(--vm-ink-2);
+      transition: border-color .15s; box-sizing: border-box; width: 100%;
+    }
+    .vg-field input:focus { outline: none; border-color: var(--veeam-green); }
+    /* questions */
+    .vg-q { margin-bottom: 18px; }
+    .vg-qlabel { display: block; font: 600 12px/16px var(--font-sans); letter-spacing: .04em; text-transform: uppercase; color: var(--vm-slate); margin-bottom: 8px; }
     .vg-req { color: #E53; }
-    .vg-hint { font-weight: 400; color: var(--vm-slate); }
-    .vg-options { display: flex; flex-direction: column; gap: 8px; }
+    .vg-options { display: flex; flex-direction: column; gap: 6px; }
     .vg-opt {
-      display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px;
-      border: 1.5px solid var(--vm-grey-200); border-radius: 10px;
+      display: flex; align-items: center; gap: 10px; padding: 9px 12px;
+      border: 1.5px solid var(--vm-grey-200); border-radius: 8px;
       cursor: pointer; transition: border-color .15s, background .15s;
-      font: 400 14px/20px var(--font-sans); color: var(--vm-ink-2);
+      font: 400 13px/18px var(--font-sans); color: var(--vm-ink-2);
     }
-    .vg-opt:hover { border-color: var(--veeam-green); background: #F0FDF6; }
-    .vg-opt input[type="radio"], .vg-opt input[type="checkbox"] { margin-top: 2px; flex: none; accent-color: var(--veeam-green); }
-    .vg-opt input:checked ~ span { color: var(--veeam-green-dark); font-weight: 500; }
-    .vg-opt:has(input:checked) { border-color: var(--veeam-green); background: #F0FDF6; }
-    .vg-scale-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
-    .vg-scale-end { font: 400 12px/16px var(--font-sans); color: var(--vm-slate); white-space: nowrap; }
-    .vg-scale { display: flex; gap: 8px; }
+    .vg-opt:hover { border-color: var(--veeam-green); background: #F4FEF8; }
+    .vg-opt input[type="radio"], .vg-opt input[type="checkbox"] { flex: none; accent-color: var(--veeam-green); width: 15px; height: 15px; }
+    .vg-opt:has(input:checked) { border-color: var(--veeam-green); background: #F4FEF8; }
+    .vg-opt:has(input:checked) span { color: var(--veeam-green-dark); font-weight: 600; }
+    /* scale */
+    .vg-scale-wrap { display: flex; align-items: center; gap: 8px; }
+    .vg-scale-end { font: 400 11px/14px var(--font-sans); color: var(--vm-slate); white-space: nowrap; flex: 1; }
+    .vg-scale-end:last-child { text-align: right; }
+    .vg-scale { display: flex; gap: 6px; }
     .vg-scale button {
-      width: 44px; height: 44px; border-radius: 10px; border: 2px solid var(--vm-grey-200);
-      background: #fff; font: 700 16px/1 var(--font-display); color: var(--vm-slate);
-      cursor: pointer; transition: all .15s;
+      width: 40px; height: 40px; border-radius: 8px; border: 2px solid var(--vm-grey-200);
+      background: #fff; font: 700 15px/1 var(--font-display); color: var(--vm-slate);
+      cursor: pointer; transition: all .15s; flex: none;
     }
-    .vg-scale button:hover { border-color: var(--veeam-green); color: var(--veeam-green-dark); }
+    .vg-scale button:hover { border-color: var(--veeam-green); color: var(--veeam-green-dark); background: #F4FEF8; }
     .vg-scale button.is-sel { background: var(--veeam-green); border-color: var(--veeam-green); color: #fff; }
+    /* textarea */
     #vg-form textarea {
-      width: 100%; border: 1.5px solid var(--vm-grey-200); border-radius: 10px;
-      padding: 10px 14px; font: 400 14px/20px var(--font-sans); color: var(--vm-ink-2);
-      resize: vertical; transition: border-color .15s; box-sizing: border-box;
+      width: 100%; border: 1.5px solid var(--vm-grey-200); border-radius: 8px;
+      padding: 9px 12px; font: 400 13px/18px var(--font-sans); color: var(--vm-ink-2);
+      resize: vertical; transition: border-color .15s; box-sizing: border-box; min-height: 64px;
     }
     #vg-form textarea:focus { outline: none; border-color: var(--veeam-green); }
-    #vg-error { color: #C0392B; font: 400 13px/18px var(--font-sans); margin-bottom: 12px; }
+    #vg-error { color: #C0392B; font: 400 12px/16px var(--font-sans); margin-bottom: 10px; display: none; }
     #vg-submit {
-      width: 100%; padding: 16px; background: var(--veeam-green); color: #00231A;
-      border: none; border-radius: 10px; font: 700 16px/20px var(--font-sans);
-      cursor: pointer; transition: background .2s, transform .12s;
+      width: 100%; padding: 14px; background: var(--veeam-green); color: #00231A;
+      border: none; border-radius: 10px; font: 700 15px/20px var(--font-sans);
+      cursor: pointer; transition: background .2s, transform .12s; margin-top: 4px;
     }
     #vg-submit:hover { background: var(--veeam-green-bright); transform: translateY(-1px); }
     #vg-submit:disabled { background: var(--vm-grey-300); color: var(--vm-grey-500); cursor: not-allowed; transform: none; }
+    /* quiz buttons */
     .q-submit {
       margin-top: 16px; background: var(--veeam-green); border: none;
       color: #00231A; padding: 11px 20px; border-radius: 999px; cursor: pointer;
@@ -367,14 +385,14 @@
     }
     .q-submit:hover { background: var(--veeam-green-bright); }
     .q-reveal-btn { background: linear-gradient(135deg, #0E2A81, #2172CA); color: #fff; margin-top: 8px; }
-    .q-reveal-btn:hover { background: linear-gradient(135deg, #2172CA, #0E2A81); }
+    .q-reveal-btn:hover { opacity: .9; }
     @keyframes buddy-pop { 0% { transform: scale(0.5) translateY(20px); opacity:0; } 70% { transform: scale(1.08); opacity:1; } 100% { transform: scale(1) translateY(0); opacity:1; } }
     .buddy.is-match.is-revealed { animation: buddy-pop .55s cubic-bezier(.34,1.56,.64,1) forwards; }
     @media (max-width: 560px) {
-      #vg-modal { padding: 28px 20px; }
-      #vg-title { font-size: 22px; }
-      .vg-scale button { width: 38px; height: 38px; font-size: 14px; }
-      .vg-scale-end { font-size: 11px; }
+      #vg-overlay { padding: 16px; }
+      #vg-modal { padding: 24px 20px 28px; border-radius: 16px; }
+      .vg-row { grid-template-columns: 1fr; }
+      .vg-scale button { width: 36px; height: 36px; font-size: 13px; }
     }
   </style>
 </head>
@@ -383,25 +401,45 @@
   <!-- ============ GATE OVERLAY ============ -->
   <div id="vg-overlay">
     <div id="vg-modal">
-      <img src="assets/veeam-logo-green.svg" alt="Veeam" id="vg-logo"/>
+      <div id="vg-header">
+        <img src="assets/veeam-logo-green.svg" alt="Veeam" id="vg-logo"/>
+        <span id="vg-badge">5가지 질문 · 1분</span>
+      </div>
       <h2 id="vg-title">잠깐, 몇 가지만 여쭤볼게요</h2>
       <p id="vg-sub">맞춤 후속 세션을 준비할 수 있도록 도와주세요. 1분도 안 걸립니다.</p>
+      <div class="vg-divider"></div>
       <form id="vg-form" novalidate>
         <input type="hidden" name="_subject" value="KR Playbook — Gate Submission"/>
         <input type="hidden" name="session_id" id="vg-sid"/>
-        <div class="vg-q">
-          <label class="vg-qlabel">Q1 — 현재 Microsoft 365를 어떻게 보호하고 있나요? <span class="vg-req">*</span></label>
-          <div class="vg-options" id="vg-q1">
-            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="서드파티 백업 솔루션 사용" required/><span>서드파티 백업 솔루션을 사용하고 있습니다</span></label>
-            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="Microsoft 기본 retention 의존"/><span>Microsoft 기본 retention 기능에 주로 의존합니다</span></label>
-            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="온프레미스 백업 사용"/><span>온프레미스 백업을 사용합니다</span></label>
-            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="공식 방식 없음 / 검토 중"/><span>아직 공식적인 방식이 없거나 검토 중입니다</span></label>
+
+        <!-- Name + Email -->
+        <div class="vg-row">
+          <div class="vg-field">
+            <label for="vg-name">이름 <span class="vg-req">*</span></label>
+            <input type="text" id="vg-name" name="full_name" placeholder="홍길동" required/>
+          </div>
+          <div class="vg-field">
+            <label for="vg-email">회사 이메일 <span class="vg-req">*</span></label>
+            <input type="email" id="vg-email" name="work_email" placeholder="you@company.com" required/>
           </div>
         </div>
+
+        <!-- Q1 -->
         <div class="vg-q">
-          <label class="vg-qlabel">Q2a — 팀의 M365 resilience(레질리언스)에 얼마나 자신 있으신가요? <span class="vg-req">*</span></label>
+          <label class="vg-qlabel">Q1 — 현재 Microsoft 365 보호 방식 <span class="vg-req">*</span></label>
+          <div class="vg-options">
+            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="서드파티 백업 솔루션 사용" required/><span>서드파티 백업 솔루션 사용 중</span></label>
+            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="Microsoft 기본 retention 의존"/><span>Microsoft 기본 retention 위주</span></label>
+            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="온프레미스 백업 사용"/><span>온프레미스 백업</span></label>
+            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="공식 방식 없음 / 검토 중"/><span>검토 중 / 아직 없음</span></label>
+          </div>
+        </div>
+
+        <!-- Q2a -->
+        <div class="vg-q">
+          <label class="vg-qlabel">Q2a — M365 resilience 자신감 <span class="vg-req">*</span></label>
           <div class="vg-scale-wrap">
-            <span class="vg-scale-end">1 — 자신 없음</span>
+            <span class="vg-scale-end">자신 없음</span>
             <div class="vg-scale" id="vg-q2a">
               <button type="button" data-val="1">1</button>
               <button type="button" data-val="2">2</button>
@@ -409,14 +447,16 @@
               <button type="button" data-val="4">4</button>
               <button type="button" data-val="5">5</button>
             </div>
-            <span class="vg-scale-end">5 — 매우 자신 있음</span>
+            <span class="vg-scale-end">매우 자신 있음</span>
           </div>
           <input type="hidden" name="q2a_m365_resilience_confidence" id="vg-q2a-val"/>
         </div>
+
+        <!-- Q2b -->
         <div class="vg-q">
-          <label class="vg-qlabel">Q2b — AI 에이전트(Microsoft Agent 365)가 접근·분류·수정할 수 있는 데이터에 대한 귀사의 가시성과 통제력은 어느 정도인가요? <span class="vg-req">*</span></label>
+          <label class="vg-qlabel">Q2b — Agent 365 데이터 가시성·통제 수준 <span class="vg-req">*</span></label>
           <div class="vg-scale-wrap">
-            <span class="vg-scale-end">1 — 자신 없음</span>
+            <span class="vg-scale-end">자신 없음</span>
             <div class="vg-scale" id="vg-q2b">
               <button type="button" data-val="1">1</button>
               <button type="button" data-val="2">2</button>
@@ -424,26 +464,31 @@
               <button type="button" data-val="4">4</button>
               <button type="button" data-val="5">5</button>
             </div>
-            <span class="vg-scale-end">5 — 매우 자신 있음</span>
+            <span class="vg-scale-end">매우 자신 있음</span>
           </div>
           <input type="hidden" name="q2b_agent365_governance_confidence" id="vg-q2b-val"/>
         </div>
+
+        <!-- Q3 -->
         <div class="vg-q">
-          <label class="vg-qlabel">Q3 — 어떤 도움이 가장 필요하신가요? <span class="vg-hint">(복수 선택 가능)</span></label>
+          <label class="vg-qlabel">Q3 — 가장 필요한 도움 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--vm-slate);">(복수 선택)</span></label>
           <div class="vg-options">
-            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="Agentic 거버넌스 및 데이터 분류 추가 세션 (Agent 365 / Purview)"/><span>Agentic 거버넌스 및 데이터 분류 추가 세션 — Agent 365가 AI 에이전트의 접근을 제어하고, Purview 정책을 적용하며, audit trail을 유지하는 방법</span></label>
-            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="기술 데모 및 검토 세션 (Veeam M365 보호 및 복구)"/><span>기술 데모 및 검토 세션 — Veeam의 Microsoft 365 데이터 보호 및 복구 방식 (자사 환경 반영)</span></label>
-            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="Veeam Data Cloud 고객 사례"/><span>Veeam Data Cloud 데이터 복구 실제 고객 사례</span></label>
-            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="Veeam 최신 혁신 기능 소개 (Intelligent ResOps 포함)"/><span>Veeam 최신 혁신 기능 소개 (Intelligent ResOps 포함)</span></label>
+            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="Agentic 거버넌스 & 데이터 분류 세션"/><span>Agentic 거버넌스 & 데이터 분류 세션</span></label>
+            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="Veeam M365 기술 데모 & 검토"/><span>Veeam M365 기술 데모 & 검토</span></label>
+            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="Veeam Data Cloud 고객 사례"/><span>Veeam Data Cloud 고객 사례</span></label>
+            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="Veeam 최신 혁신 기능 (Intelligent ResOps)"/><span>Veeam 최신 혁신 기능 (Intelligent ResOps)</span></label>
             <label class="vg-opt"><input type="checkbox" name="q3_needs" value="지금은 괜찮습니다"/><span>지금은 괜찮습니다</span></label>
           </div>
         </div>
+
+        <!-- Q4 -->
         <div class="vg-q">
-          <label class="vg-qlabel">Q4 — 본 세션의 피드백 또는 Microsoft / Veeam에서 다뤄줬으면 하는 주제가 있으신가요? <span class="vg-hint">(선택 사항)</span></label>
-          <textarea name="q4_feedback" rows="3" placeholder="자유 응답"></textarea>
+          <label class="vg-qlabel">Q4 — 피드백 또는 다뤄줬으면 하는 주제 <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--vm-slate);">(선택)</span></label>
+          <textarea name="q4_feedback" placeholder="자유 응답"></textarea>
         </div>
-        <div id="vg-error" style="display:none;">Q1, Q2a, Q2b는 필수 항목입니다.</div>
-        <button type="submit" id="vg-submit">제출하기</button>
+
+        <div id="vg-error">이름, 이메일, Q1, Q2a, Q2b는 필수입니다.</div>
+        <button type="submit" id="vg-submit">제출하기 →</button>
       </form>
     </div>
   </div>
@@ -899,18 +944,18 @@
     var form = document.getElementById('vg-form');
     if (form) form.addEventListener('submit', async function(e) {
       e.preventDefault();
-      var q1 = document.querySelector('input[name="q1_m365_protection"]:checked');
+      var name = document.getElementById('vg-name').value.trim(); var email = document.getElementById('vg-email').value.trim(); var q1 = document.querySelector('input[name="q1_m365_protection"]:checked');
       var q2a = document.getElementById('vg-q2a-val').value;
       var q2b = document.getElementById('vg-q2b-val').value;
       var errEl = document.getElementById('vg-error');
-      if (!q1 || !q2a || !q2b) { errEl.style.display='block'; return; }
+      if (!name || !email || !q1 || !q2a || !q2b) { errEl.style.display='block'; return; }
       errEl.style.display = 'none';
       var btn = document.getElementById('vg-submit');
       btn.disabled = true; btn.textContent = '제출 중...';
       var q3vals = Array.from(document.querySelectorAll('input[name="q3_needs"]:checked')).map(function(c){return c.value;}).join(' | ') || '선택 없음';
       var data = new FormData();
       data.append('_subject', 'KR Playbook — Gate Submission');
-      data.append('session_id', sid);
+      data.append('session_id', sid); data.append('full_name', name); data.append('work_email', email);
       data.append('q1_m365_protection', q1.value);
       data.append('q2a_m365_resilience_confidence', q2a);
       data.append('q2b_agent365_governance_confidence', q2b);
