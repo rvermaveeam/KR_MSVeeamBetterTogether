@@ -306,9 +306,143 @@
       .sum-card { padding: 24px 20px; }
       .btn { padding: 14px 20px; font-size: 15px; }
     }
+    /* ============ GATE OVERLAY ============ */
+    #vg-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: linear-gradient(135deg, #00012B 0%, #0E2A81 58%, #2172CA 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; overflow-y: auto;
+    }
+    #vg-modal {
+      background: #fff; border-radius: 24px; padding: 40px 44px;
+      max-width: 620px; width: 100%; box-shadow: 0 24px 64px rgba(0,0,40,.35);
+      max-height: 90vh; overflow-y: auto;
+    }
+    #vg-logo { height: 36px; margin-bottom: 24px; display: block; }
+    #vg-title { font: 700 26px/32px var(--font-display); letter-spacing: -0.02em; margin: 0 0 8px; color: var(--vm-ink-2); }
+    #vg-sub { font: 400 15px/22px var(--font-sans); color: var(--vm-slate); margin: 0 0 28px; }
+    .vg-q { margin-bottom: 24px; }
+    .vg-qlabel { display: block; font: 600 14px/20px var(--font-sans); color: var(--vm-ink-2); margin-bottom: 10px; }
+    .vg-req { color: #E53; }
+    .vg-hint { font-weight: 400; color: var(--vm-slate); }
+    .vg-options { display: flex; flex-direction: column; gap: 8px; }
+    .vg-opt {
+      display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px;
+      border: 1.5px solid var(--vm-grey-200); border-radius: 10px;
+      cursor: pointer; transition: border-color .15s, background .15s;
+      font: 400 14px/20px var(--font-sans); color: var(--vm-ink-2);
+    }
+    .vg-opt:hover { border-color: var(--veeam-green); background: #F0FDF6; }
+    .vg-opt input[type="radio"], .vg-opt input[type="checkbox"] { margin-top: 2px; flex: none; accent-color: var(--veeam-green); }
+    .vg-opt input:checked ~ span { color: var(--veeam-green-dark); font-weight: 500; }
+    .vg-opt:has(input:checked) { border-color: var(--veeam-green); background: #F0FDF6; }
+    .vg-scale-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+    .vg-scale-end { font: 400 12px/16px var(--font-sans); color: var(--vm-slate); white-space: nowrap; }
+    .vg-scale { display: flex; gap: 8px; }
+    .vg-scale button {
+      width: 44px; height: 44px; border-radius: 10px; border: 2px solid var(--vm-grey-200);
+      background: #fff; font: 700 16px/1 var(--font-display); color: var(--vm-slate);
+      cursor: pointer; transition: all .15s;
+    }
+    .vg-scale button:hover { border-color: var(--veeam-green); color: var(--veeam-green-dark); }
+    .vg-scale button.is-sel { background: var(--veeam-green); border-color: var(--veeam-green); color: #fff; }
+    #vg-form textarea {
+      width: 100%; border: 1.5px solid var(--vm-grey-200); border-radius: 10px;
+      padding: 10px 14px; font: 400 14px/20px var(--font-sans); color: var(--vm-ink-2);
+      resize: vertical; transition: border-color .15s; box-sizing: border-box;
+    }
+    #vg-form textarea:focus { outline: none; border-color: var(--veeam-green); }
+    #vg-error { color: #C0392B; font: 400 13px/18px var(--font-sans); margin-bottom: 12px; }
+    #vg-submit {
+      width: 100%; padding: 16px; background: var(--veeam-green); color: #00231A;
+      border: none; border-radius: 10px; font: 700 16px/20px var(--font-sans);
+      cursor: pointer; transition: background .2s, transform .12s;
+    }
+    #vg-submit:hover { background: var(--veeam-green-bright); transform: translateY(-1px); }
+    #vg-submit:disabled { background: var(--vm-grey-300); color: var(--vm-grey-500); cursor: not-allowed; transform: none; }
+    .q-submit {
+      margin-top: 16px; background: var(--veeam-green); border: none;
+      color: #00231A; padding: 11px 20px; border-radius: 999px; cursor: pointer;
+      font: 700 14px/16px var(--font-sans); transition: all .15s; width: 100%;
+    }
+    .q-submit:hover { background: var(--veeam-green-bright); }
+    @media (max-width: 560px) {
+      #vg-modal { padding: 28px 20px; }
+      #vg-title { font-size: 22px; }
+      .vg-scale button { width: 38px; height: 38px; font-size: 14px; }
+      .vg-scale-end { font-size: 11px; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- ============ GATE OVERLAY ============ -->
+  <div id="vg-overlay">
+    <div id="vg-modal">
+      <img src="assets/veeam-logo-green.svg" alt="Veeam" id="vg-logo"/>
+      <h2 id="vg-title">잠깐, 몇 가지만 여쭤볼게요</h2>
+      <p id="vg-sub">맞춤 후속 세션을 준비할 수 있도록 도와주세요. 1분도 안 걸립니다.</p>
+      <form id="vg-form" novalidate>
+        <input type="hidden" name="_subject" value="KR Playbook — Gate Submission"/>
+        <input type="hidden" name="session_id" id="vg-sid"/>
+        <div class="vg-q">
+          <label class="vg-qlabel">Q1 — 현재 Microsoft 365를 어떻게 보호하고 있나요? <span class="vg-req">*</span></label>
+          <div class="vg-options" id="vg-q1">
+            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="서드파티 백업 솔루션 사용" required/><span>서드파티 백업 솔루션을 사용하고 있습니다</span></label>
+            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="Microsoft 기본 retention 의존"/><span>Microsoft 기본 retention 기능에 주로 의존합니다</span></label>
+            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="온프레미스 백업 사용"/><span>온프레미스 백업을 사용합니다</span></label>
+            <label class="vg-opt"><input type="radio" name="q1_m365_protection" value="공식 방식 없음 / 검토 중"/><span>아직 공식적인 방식이 없거나 검토 중입니다</span></label>
+          </div>
+        </div>
+        <div class="vg-q">
+          <label class="vg-qlabel">Q2a — 팀의 M365 resilience(레질리언스)에 얼마나 자신 있으신가요? <span class="vg-req">*</span></label>
+          <div class="vg-scale-wrap">
+            <span class="vg-scale-end">1 — 자신 없음</span>
+            <div class="vg-scale" id="vg-q2a">
+              <button type="button" data-val="1">1</button>
+              <button type="button" data-val="2">2</button>
+              <button type="button" data-val="3">3</button>
+              <button type="button" data-val="4">4</button>
+              <button type="button" data-val="5">5</button>
+            </div>
+            <span class="vg-scale-end">5 — 매우 자신 있음</span>
+          </div>
+          <input type="hidden" name="q2a_m365_resilience_confidence" id="vg-q2a-val"/>
+        </div>
+        <div class="vg-q">
+          <label class="vg-qlabel">Q2b — AI 에이전트(Microsoft Agent 365)가 접근·분류·수정할 수 있는 데이터에 대한 귀사의 가시성과 통제력은 어느 정도인가요? <span class="vg-req">*</span></label>
+          <div class="vg-scale-wrap">
+            <span class="vg-scale-end">1 — 자신 없음</span>
+            <div class="vg-scale" id="vg-q2b">
+              <button type="button" data-val="1">1</button>
+              <button type="button" data-val="2">2</button>
+              <button type="button" data-val="3">3</button>
+              <button type="button" data-val="4">4</button>
+              <button type="button" data-val="5">5</button>
+            </div>
+            <span class="vg-scale-end">5 — 매우 자신 있음</span>
+          </div>
+          <input type="hidden" name="q2b_agent365_governance_confidence" id="vg-q2b-val"/>
+        </div>
+        <div class="vg-q">
+          <label class="vg-qlabel">Q3 — 어떤 도움이 가장 필요하신가요? <span class="vg-hint">(복수 선택 가능)</span></label>
+          <div class="vg-options">
+            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="Agentic 거버넌스 및 데이터 분류 추가 세션 (Agent 365 / Purview)"/><span>Agentic 거버넌스 및 데이터 분류 추가 세션 — Agent 365가 AI 에이전트의 접근을 제어하고, Purview 정책을 적용하며, audit trail을 유지하는 방법</span></label>
+            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="기술 데모 및 검토 세션 (Veeam M365 보호 및 복구)"/><span>기술 데모 및 검토 세션 — Veeam의 Microsoft 365 데이터 보호 및 복구 방식 (자사 환경 반영)</span></label>
+            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="Veeam Data Cloud 고객 사례"/><span>Veeam Data Cloud 데이터 복구 실제 고객 사례</span></label>
+            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="Veeam 최신 혁신 기능 소개 (Intelligent ResOps 포함)"/><span>Veeam 최신 혁신 기능 소개 (Intelligent ResOps 포함)</span></label>
+            <label class="vg-opt"><input type="checkbox" name="q3_needs" value="지금은 괜찮습니다"/><span>지금은 괜찮습니다</span></label>
+          </div>
+        </div>
+        <div class="vg-q">
+          <label class="vg-qlabel">Q4 — 본 세션의 피드백 또는 Microsoft / Veeam에서 다뤄줬으면 하는 주제가 있으신가요? <span class="vg-hint">(선택 사항)</span></label>
+          <textarea name="q4_feedback" rows="3" placeholder="자유 응답"></textarea>
+        </div>
+        <div id="vg-error" style="display:none;">Q1, Q2a, Q2b는 필수 항목입니다.</div>
+        <button type="submit" id="vg-submit">제출하기</button>
+      </form>
+    </div>
+  </div>
 
   <!-- ============ HERO ============ -->
   <header class="hero" data-screen-label="Hero · Thank you">
@@ -404,13 +538,15 @@
               <div class="pct">0%</div>
             </div>
             <div class="lbl">현재 복원력 수준</div>
-            <button class="q-reset" type="button" data-q-reset>초기화</button>
+            <button class="q-submit" type="button" id="q-submit-btn">결과 확인하기</button>
+            <button class="q-reset" type="button" data-q-reset id="q-retake-btn" style="display:none;">다시 하기</button>
           </div>
           <div class="q-result">
             <div class="rh">나의 버디</div>
             <div class="rname"><span data-r-hangul>콩이</span> <span data-r-name>Kongi</span></div>
             <div class="rtitle" data-r-title>The Sprout</div>
             <div class="rmsg" data-r-msg>해당 항목을 체크하면 나의 버디를 만날 수 있습니다.</div>
+            <div id="q-recorded-badge" style="display:none;margin-top:10px;font:600 11px/14px var(--font-sans);letter-spacing:.08em;text-transform:uppercase;color:var(--veeam-green);">✓ 기록 완료</div>
           </div>
         </aside>
       </div>
@@ -734,6 +870,66 @@
     </div>
   </section>
 
+  <script>
+  (function() {
+    var sid = sessionStorage.getItem('veeam_session_id');
+    if (!sid) { sid = 'kr_' + Date.now() + '_' + Math.random().toString(36).slice(2,7); sessionStorage.setItem('veeam_session_id', sid); }
+    var sidEl = document.getElementById('vg-sid');
+    if (sidEl) sidEl.value = sid;
+    if (sessionStorage.getItem('veeam_gate_done')) {
+      var ov = document.getElementById('vg-overlay');
+      if (ov) ov.style.display = 'none';
+    }
+    document.querySelectorAll('.vg-scale').forEach(function(scale) {
+      var inputId = scale.id === 'vg-q2a' ? 'vg-q2a-val' : 'vg-q2b-val';
+      scale.querySelectorAll('button').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          scale.querySelectorAll('button').forEach(function(b) { b.classList.remove('is-sel'); });
+          btn.classList.add('is-sel');
+          var el = document.getElementById(inputId);
+          if (el) el.value = btn.dataset.val;
+        });
+      });
+    });
+    var form = document.getElementById('vg-form');
+    if (form) form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var q1 = document.querySelector('input[name="q1_m365_protection"]:checked');
+      var q2a = document.getElementById('vg-q2a-val').value;
+      var q2b = document.getElementById('vg-q2b-val').value;
+      var errEl = document.getElementById('vg-error');
+      if (!q1 || !q2a || !q2b) { errEl.style.display='block'; return; }
+      errEl.style.display = 'none';
+      var btn = document.getElementById('vg-submit');
+      btn.disabled = true; btn.textContent = '제출 중...';
+      var q3vals = Array.from(document.querySelectorAll('input[name="q3_needs"]:checked')).map(function(c){return c.value;}).join(' | ') || '선택 없음';
+      var data = new FormData();
+      data.append('_subject', 'KR Playbook — Gate Submission');
+      data.append('session_id', sid);
+      data.append('q1_m365_protection', q1.value);
+      data.append('q2a_m365_resilience_confidence', q2a);
+      data.append('q2b_agent365_governance_confidence', q2b);
+      data.append('q3_needs', q3vals);
+      data.append('q4_feedback', document.querySelector('textarea[name="q4_feedback"]').value || '');
+      try {
+        var res = await fetch('https://formspree.io/f/mbdekknd', {method:'POST',body:data,headers:{'Accept':'application/json'}});
+        if (res.ok) {
+          sessionStorage.setItem('veeam_gate_done','1');
+          var overlay = document.getElementById('vg-overlay');
+          overlay.style.transition = 'opacity .4s';
+          overlay.style.opacity = '0';
+          setTimeout(function(){ overlay.style.display='none'; }, 400);
+        } else {
+          btn.disabled=false; btn.textContent='제출하기';
+          errEl.textContent='제출 중 오류가 발생했습니다. 다시 시도해주세요.'; errEl.style.display='block';
+        }
+      } catch(err) {
+        btn.disabled=false; btn.textContent='제출하기';
+        errEl.textContent='네트워크 오류입니다. 다시 시도해주세요.'; errEl.style.display='block';
+      }
+    });
+  })();
+  </script>
   <script src="assets/korea-quiz.js"></script>
 </body>
 </html>
