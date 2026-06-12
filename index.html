@@ -171,6 +171,20 @@
     }
     .q-reset:hover { border-color: var(--vm-slate); color: var(--vm-ink-2); }
 
+    .q-mystery { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0 4px; }
+    .q-mystery .mystery-box {
+      width: 72px; height: 72px; border-radius: 18px;
+      background: linear-gradient(135deg, #E8EEFF, #D4DEFF);
+      border: 2px dashed #B0BCEE;
+      display: grid; place-items: center;
+      font-size: 36px; line-height: 1;
+      animation: mystery-pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes mystery-pulse { 0%,100% { transform: scale(1); opacity:.7; } 50% { transform: scale(1.06); opacity:1; } }
+    .q-mystery .mystery-label { font: 600 11px/14px var(--font-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--vm-slate); }
+    .q-result.is-live .q-mystery { display: none; }
+    .q-result-content { display: none; }
+    .q-result.is-live .q-result-content { display: block; }
     .q-result {
       border: 1.5px dashed var(--vm-grey-300); border-radius: 22px; padding: 24px;
       text-align: center; opacity: .55; transition: opacity .3s; background: var(--vm-grey-100);
@@ -547,11 +561,18 @@
             <button class="q-reset" type="button" data-q-reset id="q-retake-btn" style="display:none;">다시 하기</button>
           </div>
           <div class="q-result">
+            <div class="q-mystery">
+              <div class="mystery-box">?</div>
+              <div class="mystery-label">버디 미공개</div>
+            </div>
+            <div class="q-result-content">
             <div class="rh">나의 버디</div>
             <div class="rname"><span data-r-hangul>콩이</span> <span data-r-name>Kongi</span></div>
-            <div class="rtitle" data-r-title>The Sprout</div>
+            <div class="rtitle" data-r-title>새싹</div>
             <div class="rmsg" data-r-msg>해당 항목을 체크하면 나의 버디를 만날 수 있습니다.</div>
+            </div>
             <div id="q-recorded-badge" style="display:none;margin-top:10px;font:600 11px/14px var(--font-sans);letter-spacing:.08em;text-transform:uppercase;color:var(--veeam-green);">✓ 기록 완료</div>
+            </div><!-- /.q-result-content -->
           </div>
         </aside>
       </div>
