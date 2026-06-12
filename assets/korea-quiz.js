@@ -1,4 +1,4 @@
-/* Veeam Korea — resilience quiz: 8 questions, 4 buddies. Submit-to-reveal, discrete recording. */
+/* Veeam Korea — resilience quiz: 8 questions, 4 buddies. Two-step reveal, discrete recording. */
 (function () {
   const BUDDIES = [
     { key: 'kongi',  min: 0,  max: 25,  name: 'Kongi',  hangul: '콩이',
@@ -26,20 +26,34 @@
     '백업 하드웨어 갱신 및 클라우드 비교',
   ];
 
+  let _pendingBuddy = null;
+  let _pendingItems = null;
+  let _pendingPct = 0;
+  let _pendingChecked = 0;
+
   function pick(pct) {
     return BUDDIES.find(b => pct >= b.min && pct <= b.max) || BUDDIES[0];
   }
 
-  function revealResults() {
+  // PHASE 1 — calculate score, animate ring, show "reveal buddy" button
+  function submitQuiz() {
     const items = document.querySelectorAll('.q-item');
     const total = items.length;
     if (!total) return;
     const checked = document.querySelectorAll('.q-item.is-on').length;
     const pct = Math.round((checked / total) * 100);
 
+    // Store for phase 2
+    _pendingBuddy = pick(pct);
+    _pendingItems = items;
+    _pendingPct = pct;
+    _pendingChecked = checked;
+
+    // Update count
     const countEl = document.querySelector('[data-q-count]');
     if (countEl) countEl.textContent = checked + ' / ' + total;
 
+    // Animate ring
     const ring = document.querySelector('.q-ring .arc');
     const num = document.querySelector('.q-ring .pct');
     if (num) num.textContent = pct + '%';
@@ -54,29 +68,52 @@
       ring.style.stroke = color;
     }
 
-    const buddy = pick(pct);
-    document.querySelectorAll('.buddy').forEach(card => {
-      card.classList.toggle('is-match', card.dataset.buddy === buddy.key);
-    });
+    // Show reveal button, hide submit
+    const submitBtn = document.getElementById('q-submit-btn');
+    const revealBtn = document.getElementById('q-reveal-btn');
+    if (submitBtn) submitBtn.style.display = 'none';
+    if (revealBtn) revealBtn.style.display = '';
 
-    const rName = document.querySelector('[data-r-name]');
+    // Silently record now (before reveal)
+    recordQuizResults(_pendingItems, _pendingBuddy, _pendingPct, _pendingChecked, total);
+  }
+
+  // PHASE 2 — reveal the buddy with animation
+  function revealBuddy() {
+    if (!_pendingBuddy) return;
+
+    // Fill result panel
+    const rName   = document.querySelector('[data-r-name]');
     const rHangul = document.querySelector('[data-r-hangul]');
-    const rTitle = document.querySelector('[data-r-title]');
-    const rMsg = document.querySelector('[data-r-msg]');
-    if (rName) rName.textContent = buddy.name;
-    if (rHangul) rHangul.textContent = buddy.hangul;
-    if (rTitle) rTitle.textContent = buddy.title;
-    if (rMsg) rMsg.textContent = buddy.msg;
+    const rTitle  = document.querySelector('[data-r-title]');
+    const rMsg    = document.querySelector('[data-r-msg]');
+    if (rName)   rName.textContent   = _pendingBuddy.name;
+    if (rHangul) rHangul.textContent = _pendingBuddy.hangul;
+    if (rTitle)  rTitle.textContent  = _pendingBuddy.title;
+    if (rMsg)    rMsg.textContent    = _pendingBuddy.msg;
 
     const result = document.querySelector('.q-result');
     if (result) result.classList.add('is-live');
 
-    const submitBtn = document.getElementById('q-submit-btn');
-    const retakeBtn = document.getElementById('q-retake-btn');
-    if (submitBtn) submitBtn.style.display = 'none';
-    if (retakeBtn) retakeBtn.style.display = '';
+    // Pop the matched buddy card
+    document.querySelectorAll('.buddy').forEach(card => {
+      const match = card.dataset.buddy === _pendingBuddy.key;
+      card.classList.toggle('is-match', match);
+      if (match) {
+        card.classList.remove('is-revealed');
+        // force reflow for animation restart
+        void card.offsetWidth;
+        card.classList.add('is-revealed');
+        // scroll matched card into view smoothly
+        setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+      }
+    });
 
-    recordQuizResults(items, buddy, pct, checked, total);
+    // Swap buttons
+    const revealBtn = document.getElementById('q-reveal-btn');
+    const retakeBtn = document.getElementById('q-retake-btn');
+    if (revealBtn) revealBtn.style.display = 'none';
+    if (retakeBtn) retakeBtn.style.display = '';
   }
 
   async function recordQuizResults(items, buddy, pct, checked, total) {
@@ -108,6 +145,7 @@
   }
 
   function resetQuiz() {
+    _pendingBuddy = null; _pendingItems = null; _pendingPct = 0; _pendingChecked = 0;
     document.querySelectorAll('.q-item.is-on').forEach(i => {
       i.classList.remove('is-on');
       i.setAttribute('aria-checked', 'false');
@@ -121,10 +159,12 @@
     if (num) num.textContent = '0%';
     const result = document.querySelector('.q-result');
     if (result) result.classList.remove('is-live');
-    document.querySelectorAll('.buddy').forEach(c => c.classList.remove('is-match'));
+    document.querySelectorAll('.buddy').forEach(c => { c.classList.remove('is-match'); c.classList.remove('is-revealed'); });
     const submitBtn = document.getElementById('q-submit-btn');
+    const revealBtn = document.getElementById('q-reveal-btn');
     const retakeBtn = document.getElementById('q-retake-btn');
     if (submitBtn) submitBtn.style.display = '';
+    if (revealBtn) revealBtn.style.display = 'none';
     if (retakeBtn) retakeBtn.style.display = 'none';
     sessionStorage.removeItem('veeam_quiz_recorded');
     const badge = document.getElementById('q-recorded-badge');
@@ -132,6 +172,7 @@
   }
 
   function init() {
+    // Tick — visual only, updates count
     document.addEventListener('click', e => {
       const item = e.target.closest && e.target.closest('.q-item');
       if (!item) return;
@@ -152,7 +193,10 @@
     });
 
     const submitBtn = document.getElementById('q-submit-btn');
-    if (submitBtn) submitBtn.addEventListener('click', revealResults);
+    if (submitBtn) submitBtn.addEventListener('click', submitQuiz);
+
+    const revealBtn = document.getElementById('q-reveal-btn');
+    if (revealBtn) revealBtn.addEventListener('click', revealBuddy);
 
     document.addEventListener('click', e => {
       if (!e.target.closest || !e.target.closest('[data-q-reset]')) return;
