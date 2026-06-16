@@ -403,6 +403,17 @@
       <form id="vg-form" novalidate>
         <input type="hidden" name="_subject" value="KR Playbook — Gate Submission"/>
         <input type="hidden" name="session_id" id="vg-sid"/>
+
+        <!-- Name + Email -->
+        <div class="vg-q">
+          <label class="vg-qlabel">이름 <span class="vg-req">*</span></label>
+          <input type="text" id="vg-name" name="full_name" placeholder="홍길동" required style="width:100%;border:1.5px solid var(--vm-grey-200);border-radius:10px;padding:10px 14px;font:400 14px/20px var(--font-sans);color:var(--vm-ink-2);box-sizing:border-box;transition:border-color .15s;" onfocus="this.style.borderColor='var(--veeam-green)'" onblur="this.style.borderColor='var(--vm-grey-200)'"/>
+        </div>
+        <div class="vg-q">
+          <label class="vg-qlabel">회사 이메일 <span class="vg-req">*</span></label>
+          <input type="email" id="vg-email" name="work_email" placeholder="you@company.com" required style="width:100%;border:1.5px solid var(--vm-grey-200);border-radius:10px;padding:10px 14px;font:400 14px/20px var(--font-sans);color:var(--vm-ink-2);box-sizing:border-box;transition:border-color .15s;" onfocus="this.style.borderColor='var(--veeam-green)'" onblur="this.style.borderColor='var(--vm-grey-200)'"/>
+        </div>
+
         <div class="vg-q">
           <label class="vg-qlabel">Q1 — 현재 Microsoft 365를 어떻게 보호하고 있나요? <span class="vg-req">*</span></label>
           <div class="vg-options" id="vg-q1">
@@ -922,11 +933,13 @@
     var form = document.getElementById('vg-form');
     if (form) form.addEventListener('submit', async function(e) {
       e.preventDefault();
+      var nameVal = document.getElementById('vg-name').value.trim();
+      var emailVal = document.getElementById('vg-email').value.trim();
       var q1 = document.querySelector('input[name="q1_m365_protection"]:checked');
       var q2a = document.getElementById('vg-q2a-val').value;
       var q2b = document.getElementById('vg-q2b-val').value;
       var errEl = document.getElementById('vg-error');
-      if (!q1 || !q2a || !q2b) { errEl.style.display='block'; return; }
+      if (!nameVal || !emailVal || !q1 || !q2a || !q2b) { errEl.style.display='block'; errEl.textContent='이름, 이메일, Q1, Q2a, Q2b는 필수입니다.'; return; }
       errEl.style.display = 'none';
       var btn = document.getElementById('vg-submit');
       btn.disabled = true; btn.textContent = '제출 중...';
@@ -934,6 +947,8 @@
       var data = new FormData();
       data.append('_subject', 'KR Playbook — Gate Submission');
       data.append('session_id', sid);
+      data.append('full_name', nameVal);
+      data.append('work_email', emailVal);
       data.append('q1_m365_protection', q1.value);
       data.append('q2a_m365_resilience_confidence', q2a);
       data.append('q2b_agent365_governance_confidence', q2b);
